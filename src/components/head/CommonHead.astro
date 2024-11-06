@@ -1,5 +1,5 @@
 ---
-import { site, author } from '@/config.json'
+import { site, author, adsense } from '@/config.json'
 
 interface Props {
   title?: string
@@ -45,3 +45,4 @@ const titleWithSiteSuffix = title === site.title ? title : `${title} - ${site.ti
   title={site.title}
   href={new URL('/rss.xml', Astro.url)}
 />
+{ adsense.enable && adsense.client && <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsense.client}`}></script> }
