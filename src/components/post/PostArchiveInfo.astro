@@ -15,7 +15,7 @@ const { tags, category, class: className } = Astro.props
   {
     category && (
       <div>
-        <FolderOpen size={14} class="inline-block translate-y-[-2px]" />
+        <FolderOpen size={14} class="inline-block -translate-y-0.5" />
         <a
           class="hover:text-accent hover:underline underline-offset-2 decoration-dashed"
           href={`/categories/${slugify(category)}`}
@@ -28,7 +28,7 @@ const { tags, category, class: className } = Astro.props
   {
     tags.length > 0 && (
       <div>
-        <Tags size={14} class="inline-block translate-y-[-2px]" />
+        <Tags size={14} class="inline-block -translate-y-0.5" />
         {tags.map((tag, index) => (
           <>
             {index > 0 && <span>, </span>}

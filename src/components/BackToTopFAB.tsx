@@ -32,7 +32,20 @@ function BackToTop() {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0 }}
     >
-      <Rocket size={20} className="transform -rotate-45" />
+      <motion.div
+        whileHover={{
+          rotate: [0, -10, 10, -10, 10, 0],
+          transition: { duration: 0.4, ease: 'easeInOut' },
+        }}
+        whileTap={{
+          rotate: [0, -15, 15, -15, 15, 0],
+          transition: { duration: 0.2, ease: 'easeInOut' },
+        }}
+      >
+        <Rocket size={16} className="transform -rotate-45" />
+      </motion.div>
     </motion.button>
   )
 }
+
+export default BackToTopFAB

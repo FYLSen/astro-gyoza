@@ -45,4 +45,12 @@ const titleWithSiteSuffix = title === site.title ? title : `${title} - ${site.ti
   title={site.title}
   href={new URL('/rss.xml', Astro.url)}
 />
-{ adsense.enable && adsense.client && <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsense.client}`}></script> }
+{
+  adsense.enable && adsense.client && (
+    <script
+      async
+      is:inline
+      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsense.client}`}
+    />
+  )
+}

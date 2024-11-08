@@ -26,7 +26,7 @@ function CloseButton({
       className="text-lg opacity-50 hover:opacity-100"
       onClick={closeToast}
     >
-      <X size={16} className="inline-block translate-y-[-2px]" />
+      <X size={16} className="inline-block -translate-y-0.5" />
     </button>
   )
 }

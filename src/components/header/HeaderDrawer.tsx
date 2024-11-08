@@ -112,7 +112,7 @@ function DrawerContentImpl() {
             <LucideIcon
               name={menu.icon as iconName}
               size={16}
-              className="inline-block translate-y-[4px]"
+              className="inline-block translate-y-1"
             />
             <span>{menu.name}</span>
           </a>

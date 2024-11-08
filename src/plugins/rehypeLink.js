@@ -15,7 +15,7 @@ const createExternalLinkIcon = () => {
       'stroke-linecap': 'round',
       'stroke-linejoin': 'round',
       'aria-hidden': 'true',
-      class: 'inline-block ml-2 align-text-bottom translate-y-[-2px]',
+      class: 'inline-block mx-1 align-text-bottom -translate-y-1',
     },
     [
       h('path', { d: 'M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6' }),

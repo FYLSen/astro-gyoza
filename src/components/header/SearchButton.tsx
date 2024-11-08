@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, useAnimation } from 'framer-motion'
 import { useCurrentModal, useModal } from '@/components/ui/modal'
 import { useEffect, useState } from 'react'
 import { useDebounceValue } from '@/hooks/useDebounceValue'
@@ -14,6 +14,7 @@ async function loadPagefind() {
 
 export function SearchButton() {
   const { present } = useModal()
+  const controls = useAnimation()
 
   const openModal = () => {
     present({
@@ -25,12 +26,29 @@ export function SearchButton() {
 
   return (
     <button
-      className="size-9 rounded-full shadow-lg shadow-zinc-800/5 border border-primary bg-white/50 dark:bg-zinc-800/50 backdrop-blur flex items-center justify-center text-primary hover:bg-white/80 dark:hover:bg-zinc-800/80 transition-colors"
+      className="size-9 rounded-full shadow-lg shadow-zinc-800/5 border border-primary bg-white/50 dark:bg-zinc-800/50 backdrop-blur flex items-center justify-center text-primary hover:bg-white/80 dark:hover:bg-zinc-800/80 transition-colors overflow-hidden"
       type="button"
       aria-label="Search"
       onClick={openModal}
+      onMouseEnter={() => controls.start('animate')}
+      onMouseLeave={() => controls.start('normal')}
     >
-      <Search size={20} />
+      <motion.div
+        variants={{
+          normal: { x: 0, y: 0 },
+          animate: {
+            x: [0, 0, -3, 0],
+            y: [0, -4, 0, 0],
+          },
+        }}
+        transition={{
+          duration: 1,
+          bounce: 0.3,
+        }}
+        animate={controls}
+      >
+        <Search size={20} />
+      </motion.div>
     </button>
   )
 }

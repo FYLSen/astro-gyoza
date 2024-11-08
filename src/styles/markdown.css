@@ -113,11 +113,11 @@
 }
 
 .markdown iframe.codepen {
-  @apply min-h-[450px];
+  @apply min-h-[450px] my-4;
 }
 
 .markdown iframe.video {
-  @apply aspect-video;
+  @apply aspect-video my-4;
 }
 
 .markdown hr {

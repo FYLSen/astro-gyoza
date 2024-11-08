@@ -16,7 +16,7 @@ const wordCountStr = (wordCount / 1000).toFixed(1) + 'k'
 ---
 
 <footer class="relative z-1 py-8 px-4 md:px-8 border-t border-primary text-secondary text-sm">
-  <div class="text-center space-y-2">
+  <div class="text-center space-y-2 item-center">
     <div>
       Powered by
       <Link href="https://astro.build/">Astro</Link>
@@ -24,13 +24,13 @@ const wordCountStr = (wordCount / 1000).toFixed(1) + 'k'
       <Link href="https://github.com/lxchapu/astro-gyoza">Gyoza</Link>
     </div>
     <div class="space-x-1 flex items-center justify-center gap-2">
-      <span>&copy;{copyDate} <Link href="/">{author.name}</Link>.</span>
+      <span>&copy;&nbsp;{copyDate} <Link href="/">{author.name}</Link>.</span>
       <Link href="/rss.xml" data-no-swup>
-        <Rss size={14} class="inline-block translate-y-[-2px]" />
+        <Rss size={14} class="inline-block -translate-y-0.5" />
         RSS
       </Link>
       <Link href="/sitemap-index.xml" data-no-swup>
-        <Map size={14} class="inline-block translate-y-[-2px]" />
+        <Map size={14} class="inline-block -translate-y-0.5" />
         站点地图
       </Link>
     </div>

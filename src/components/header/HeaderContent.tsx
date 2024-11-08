@@ -135,7 +135,7 @@ function HeaderMenuItem({
             <LucideIcon
               name={icon as iconName}
               size={12}
-              className="inline-block translate-y-[-1px]"
+              className="inline-block -translate-y-0.25"
             />
           </motion.div>
         )}

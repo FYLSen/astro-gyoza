@@ -32,7 +32,7 @@ export function rehypeHeading() {
               'stroke-linecap': 'round',
               'stroke-linejoin': 'round',
               'aria-hidden': 'true',
-              class: 'inline-block ml-2 align-text-bottom translate-y-[-4px] transform -rotate-45',
+              class: 'inline-block ml-2 align-text-bottom -translate-y-1 transform -rotate-45',
             },
             [
               h('path', { d: 'M9 17H7A5 5 0 0 1 7 7h2' }),
