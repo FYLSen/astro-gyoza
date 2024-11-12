@@ -1,7 +1,7 @@
 {
   "site": {
-    "url": "https://gyoza.lxchapu.com",
-    "title": "Gyoza",
+    "url": "https://gyoza.fylsen.com",
+    "title": "Gyoza-Lucide",
     "description": "这是一个使用 Astro 和 React 开发的博客主题。",
     "keywords": "Gyoza,blog,Astro,theme,lxchapu,博客主题",
     "lang": "zh-CN",
@@ -14,7 +14,7 @@
     "avatar": "https://s2.loli.net/2024/04/30/ozsnuS5Ihf3xMBG.webp"
   },
   "hero": {
-    "name": "Gyoza",
+    "name": "Gyoza-Lucide",
     "bio": "A static blog template build with Astro and React.",
     "description": "Clean, Cute, Fast.",
     "socials": [
@@ -123,6 +123,8 @@
   },
   "adsense": {
     "enable": true,
-    "client": "ca-pub-8800087783186213"
+    "google": {
+      "client": "ca-pub-8800087783186213"
+    }
   }
 }
