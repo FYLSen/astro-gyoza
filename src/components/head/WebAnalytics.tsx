@@ -37,7 +37,7 @@ function GoogleAnalytics({
     autoTrack: true,};`,
           }}
         ></script>
-        <script async defer src={`${endpoint}?sf=${method}.js`}></script>
+        <script async defer src={`${endpoint}?method=${method}`}></script>
       </>
     )
   }

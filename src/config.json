@@ -106,10 +106,10 @@
   "analytics": {
     "enable": true,
     "google": {
-      "measurementId": "G-QT3BQ7NT12",
+      "measurementId": "G-RV6B7CSFQ0",
       "config": {
         "method": "get",
-        "endpoint": "https://api.fylsen.com/collect"
+        "endpoint": "https://api.fylsen.com/gcollect"
       }
     },
     "umami": {
