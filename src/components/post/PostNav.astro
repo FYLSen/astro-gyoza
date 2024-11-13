@@ -1,0 +1,44 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { ArrowLeft, ArrowRight } from 'lucide-astro'
+
+interface Props {
+  prev?: CollectionEntry<'posts'>
+  next?: CollectionEntry<'posts'>
+  class?: string
+}
+
+const { prev, next, class: className } = Astro.props
+---
+
+<div class="grid grid-cols-2" class:list={[className]}>
+  <div>
+    {
+      prev && (
+        <a class="flex items-center gap-2 hover:text-accent group" href={`/posts/${prev.slug}`}>
+          <ArrowLeft
+            size={16}
+            class="flex-shrink-0 transition-transform group-hover:-translate-x-1"
+          />
+          <span class="line-clamp-2">{prev.data.title}</span>
+        </a>
+      )
+    }
+  </div>
+  <div>
+    {
+      next && (
+        <a
+          class="flex items-center justify-end gap-2 hover:text-accent group"
+          href={`/posts/${next.slug}`}
+        >
+          <span class="line-clamp-2 text-right">{next.data.title}</span>
+          <ArrowRight
+            size={16}
+            class="flex-shrink-0 transition-transform group-hover:translate-x-1"
+          />
+        </a>
+      )
+    }
+  </div>
+</div>

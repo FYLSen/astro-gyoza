@@ -1,0 +1,134 @@
+{
+  "site": {
+    "url": "https://gyoza.fylsen.com",
+    "title": "Gyoza-Lucide",
+    "description": "这是一个使用 Astro 和 React 开发的博客主题。",
+    "keywords": "Gyoza,blog,Astro,theme,lxchapu,博客主题",
+    "lang": "zh-CN",
+    "favicon": "/favicon.ico",
+    "appleTouchIcon": "/apple-touch-icon.png"
+  },
+  "author": {
+    "name": "lxchapu",
+    "twitterId": "@lxchapu",
+    "avatar": "https://s2.loli.net/2024/04/30/ozsnuS5Ihf3xMBG.webp"
+  },
+  "hero": {
+    "name": "Gyoza-Lucide",
+    "bio": "A static blog template build with Astro and React.",
+    "description": "Clean, Cute, Fast.",
+    "socials": [
+      {
+        "name": "Github",
+        "icon": "Github",
+        "url": "https://github.com/lxchapu/astro-gyoza",
+        "color": "rgb(24, 23, 23)"
+      },
+      {
+        "name": "X",
+        "icon": "Twitter",
+        "url": "https://twitter.com/lxchapu",
+        "color": "rgb(36, 46, 54)"
+      },
+      {
+        "name": "Email",
+        "icon": "Mail",
+        "url": "mailto:lxchapu@outlook.com",
+        "color": "rgb(212, 70, 56)"
+      }
+    ],
+    "yiyan": "当第一颗卫星飞向大气层外，我们便以为自己终有一日会征服宇宙。"
+  },
+  "color": {
+    "accent": [
+      { "light": "#F55555", "dark": "#FCCF31" },
+      { "light": "#0396FF", "dark": "#ABDCFF" },
+      { "light": "#fb7287", "dark": "#99D8CF" },
+      { "light": "#F072B6", "dark": "#FFF886" },
+      { "light": "#9F44D3", "dark": "#E2B0FF" },
+      { "light": "#FF6666", "dark": "#A1CCD1" },
+      { "light": "#F6416C", "dark": "#838BC6" },
+      { "light": "#32CCBC", "dark": "#90F7EC" },
+      { "light": "#33A6B8", "dark": "#79F1A4" },
+      { "light": "#F55555", "dark": "#FCCF31" }
+    ],
+    "bg": {
+      "primary": { "light": "#ffffff", "dark": "#1c1c1e" },
+      "secondary": { "light": "#f4f4f5", "dark": "#27272a" }
+    },
+    "text": {
+      "primary": { "light": "#373a3c", "dark": "#ffffff" },
+      "secondary": { "light": "#71717a", "dark": "#d1d5db" }
+    },
+    "border": {
+      "primary": { "light": "#e4e4e7", "dark": "#3f3f46" }
+    }
+  },
+  "menus": [
+    {
+      "name": "首页",
+      "link": "/",
+      "icon": "House"
+    },
+    {
+      "name": "归档",
+      "link": "/archives",
+      "icon": "Archive"
+    },
+    {
+      "name": "项目",
+      "link": "/projects",
+      "icon": "Presentation"
+    },
+    {
+      "name": "关于",
+      "link": "/about",
+      "icon": "AtSign"
+    },
+    {
+      "name": "友链",
+      "link": "/friends",
+      "icon": "Handshake"
+    }
+  ],
+  "posts": {
+    "perPage": 10
+  },
+  "footer": {
+    "startTime": "2024-04-14T00:00:00Z"
+  },
+  "waline": {
+    "serverURL": "https://waline.lxchapu.com"
+  },
+  "sponsor": {
+    "wechat": "https://object.lxchapu.com/bed%2F2024%2F0507_6e3e8f73df2d4e6d.webp"
+  },
+  "analytics": {
+    "enable": true,
+    "google": {
+      "measurementId": "G-QT3BQ7NT12",
+      "config": {
+        "method": "get",
+        "endpoint": "https://api.fylsen.com/collect"
+      }
+    },
+    "umami": {
+      "serverUrl": "",
+      "websiteId": ""
+    },
+    "microsoftClarity": {
+      "projectId": ""
+    }
+  },
+  "follow": {
+    "enable": false,
+    "feedId": "",
+    "userId": ""
+  },
+  "adsense": {
+    "enable": true,
+    "google": {
+      "client": "ca-pub-8800087783186213"
+    }
+  }
+}

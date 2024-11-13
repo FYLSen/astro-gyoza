@@ -1,0 +1,165 @@
+.markdown > :first-child {
+  @apply mt-0;
+}
+
+.markdown > :last-child {
+  @apply mb-0;
+}
+
+.markdown p {
+  @apply mb-5;
+}
+
+.markdown h1 {
+  @apply text-4xl font-extrabold mb-8;
+}
+
+.markdown h2 {
+  @apply text-2xl font-bold mt-12 mb-6;
+}
+
+.markdown h3 {
+  @apply text-xl font-semibold mt-8 mb-3;
+}
+
+.markdown h4 {
+  @apply font-semibold mt-6 mb-2;
+}
+
+.markdown a {
+  @apply font-normal text-accent hover:underline underline-offset-2;
+}
+
+.markdown a + .icon-external-link {
+  @apply text-secondary ml-1;
+}
+
+.markdown blockquote {
+  @apply my-5 pl-8 border-l-2 border-accent/80 text-secondary italic relative pt-6;
+}
+
+.markdown blockquote::before {
+  content: '';
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M4.58341 17.3211C3.55316 16.2274 3 15 3 13.0103C3 9.51086 5.45651 6.37366 9.03059 4.82318L9.92328 6.20079C6.58804 8.00539 5.93618 10.346 5.67564 11.822C6.21263 11.5443 6.91558 11.4466 7.60471 11.5105C9.40908 11.6778 10.8312 13.159 10.8312 15C10.8312 16.933 9.26416 18.5 7.33116 18.5C6.2581 18.5 5.23196 18.0095 4.58341 17.3211ZM14.5834 17.3211C13.5532 16.2274 13 15 13 13.0103C13 9.51086 15.4565 6.37366 19.0306 4.82318L19.9233 6.20079C16.588 8.00539 15.9362 10.346 15.6756 11.822C16.2126 11.5443 16.9156 11.4466 17.6047 11.5105C19.4091 11.6778 20.8312 13.159 20.8312 15C20.8312 16.933 19.2642 18.5 17.3312 18.5C16.2581 18.5 15.232 18.0095 14.5834 17.3211Z'%3E%3C/path%3E%3C/svg%3E");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  @apply absolute left-2 top-0 w-5 h-5 not-italic bg-accent opacity-80;
+}
+
+.markdown blockquote > p:last-child {
+  @apply mb-0;
+}
+
+.markdown :not(pre) > code {
+  @apply px-2 py-1 rounded bg-secondary text-sm font-semibold;
+}
+
+.markdown .code-block {
+  @apply relative mt-10 mb-5 bg-secondary rounded-lg;
+}
+
+.markdown .lang-tag {
+  @apply absolute right-6 -top-6 h-6 px-4 flex items-center rounded-t-lg bg-inherit text-sm;
+}
+
+.markdown pre {
+  @apply px-6 py-4 max-h-[450px] text-sm leading-relaxed overflow-auto;
+}
+
+.markdown .table-wrapper {
+  @apply overflow-x-auto my-5;
+}
+
+.markdown table {
+  @apply w-auto mx-auto text-left table-auto text-sm;
+}
+
+.markdown tr {
+  @apply border-b border-primary;
+}
+
+.markdown th,
+.markdown td {
+  @apply p-2;
+}
+
+.markdown td {
+  @apply align-baseline;
+}
+
+.markdown img {
+  @apply rounded-lg bg-secondary min-h-[80px] min-w-[80px];
+}
+
+.markdown figure {
+  @apply mb-5 flex flex-col items-center;
+}
+
+.markdown figcaption {
+  @apply mt-3 text-secondary text-sm;
+}
+
+.markdown .heading-anchor {
+  @apply ml-1 opacity-0 hover:no-underline;
+}
+
+.markdown .heading:hover .heading-anchor,
+.markdown .heading-anchor:focus-visible {
+  @apply opacity-100;
+}
+
+.markdown iframe {
+  @apply rounded-lg w-full bg-secondary;
+}
+
+.markdown iframe.codepen {
+  @apply min-h-[450px] my-4;
+}
+
+.markdown iframe.video {
+  @apply aspect-video my-4;
+}
+
+.markdown hr {
+  @apply my-12 mx-auto max-w-[100px] border-primary;
+}
+
+.markdown ul {
+  @apply list-disc;
+}
+
+.markdown ol {
+  @apply list-decimal;
+}
+
+.markdown ol,
+.markdown ul {
+  @apply my-5 pl-6 space-y-2;
+}
+
+.markdown ul ul,
+.markdown ul ol,
+.markdown ol ul,
+.markdown ol ol {
+  @apply my-3;
+}
+
+.markdown .spoiler {
+  @apply bg-current rounded transition-bg-color not-italic;
+}
+
+.markdown .spoiler:hover {
+  @apply bg-transparent;
+}
+
+.markdown h2 + * {
+  @apply mt-0;
+}
+
+.markdown h3 + * {
+  @apply mt-0;
+}
+
+.markdown h4 + * {
+  @apply mt-0;
+}

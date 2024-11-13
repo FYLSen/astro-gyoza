@@ -1,0 +1,38 @@
+---
+import Layout from './Layout.astro'
+import { HeadGradient } from '@/components/head-gradient'
+import Footer from '@/components/footer/Footer.astro'
+import { Header } from '@/components/header/Header'
+import { Provider } from '@/components/provider/Provider'
+import 'katex/dist/katex.min.css'
+
+interface Props {
+  title: string
+  description?: string
+  image?: string
+  mdTitle: string
+  mdDescription: string
+  mdSlug: string
+}
+
+const { title, description, image, mdTitle, mdDescription, mdSlug } = Astro.props
+---
+
+<Layout title={title} description={description} image={image}>
+  <Provider
+    pathName={Astro.url.pathname}
+    title={mdTitle}
+    description={mdDescription}
+    slug={mdSlug}
+    client:only="react"
+  />
+
+  <Header client:only="react" />
+  <main class="relative z-1 pt-16 min-h-main bg-primary">
+    <HeadGradient client:idle />
+    <div class="swup-transition-fade">
+      <slot />
+    </div>
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,43 @@
+@import './shiki.css';
+@import './markdown.css';
+@import './signature.css';
+@import './swup.css';
+
+@font-face {
+  font-family: 'Atkinson';
+  src: url('/fonts/atkinson-regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Atkinson';
+  src: url('/fonts/atkinson-bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+::selection {
+  background-color: theme('colors.accent');
+  color: white;
+}
+
+[data-theme='dark'] ::selection {
+  background-color: theme('colors.accent/0.3');
+}
+
+html {
+  color: theme('textColor.primary');
+  background-color: theme('backgroundColor.root');
+  scroll-padding-top: 64px;
+}
+
+html.gray {
+  filter: grayscale(1);
+}
+
+* {
+  scrollbar-width: thin;
+}
