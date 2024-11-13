@@ -18,7 +18,30 @@ function UmamiAnalytics({ serverUrl, websiteId }: { serverUrl?: string; websiteI
   return <script defer src={src} data-website-id={websiteId} />
 }
 
-function GoogleAnalytics({ measurementId }: { measurementId: string }) {
+function GoogleAnalytics({
+  measurementId,
+  config: { method, endpoint } = {},
+}: {
+  measurementId: string
+  config?: { method?: string; endpoint?: string }
+}) {
+  if (endpoint) {
+    return (
+      <>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.minimalAnalytics = {
+    trackingId: '${measurementId}',
+    analyticsEndpoint: '${endpoint}',
+    defineGlobal: false,
+    autoTrack: true,};`,
+          }}
+        ></script>
+        <script async defer src={`${endpoint}?method=${method}`}></script>
+      </>
+    )
+  }
+
   return (
     <>
       <script async src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}></script>
@@ -50,3 +73,5 @@ function MicrosoftClarity({ projectId }: { projectId: string }) {
     </>
   )
 }
+
+export default WebAnalytics
