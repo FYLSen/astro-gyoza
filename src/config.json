@@ -109,7 +109,7 @@
       "measurementId": "G-RV6B7CSFQ0",
       "config": {
         "method": "get",
-        "endpoint": "https://api.fylsen.com/gcollect"
+        "endpoint": "https://img.vibecho.com/gcollect*"
       }
     },
     "umami": {
