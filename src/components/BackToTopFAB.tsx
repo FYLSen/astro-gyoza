@@ -1,7 +1,25 @@
 import { useAtomValue } from 'jotai'
 import { pageScrollLocationAtom } from '@/store/scrollInfo'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useAnimation, type Variants } from 'framer-motion'
 import { Rocket } from 'lucide-react'
+
+const variants: Variants = {
+  normal: {
+    x: 0,
+    y: 0,
+  },
+  animate: {
+    x: [0, 0, -3, 2, -2, 1, -1, 0],
+    y: [0, -3, 0, -2, -3, -1, -2, 0],
+    transition: {
+      duration: 6,
+      ease: 'easeInOut',
+      repeat: Infinity,
+      repeatType: 'reverse',
+      times: [0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1],
+    },
+  },
+}
 
 export function BackToTopFAB() {
   const scrollY = useAtomValue(pageScrollLocationAtom)
@@ -15,6 +33,8 @@ export function BackToTopFAB() {
 }
 
 function BackToTop() {
+  const controls = useAnimation()
+  
   const handleBackToTop = () => {
     window.scrollTo({
       top: 0,
@@ -31,16 +51,12 @@ function BackToTop() {
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0 }}
+      onMouseEnter={() => controls.start('animate')}
+      onMouseLeave={() => controls.start('normal')}
     >
       <motion.div
-        whileHover={{
-          rotate: [0, -10, 10, -10, 10, 0],
-          transition: { duration: 0.4, ease: 'easeInOut' },
-        }}
-        whileTap={{
-          rotate: [0, -15, 15, -15, 15, 0],
-          transition: { duration: 0.2, ease: 'easeInOut' },
-        }}
+        variants={variants}
+        animate={controls}
       >
         <Rocket size={16} className="transform -rotate-45" />
       </motion.div>
