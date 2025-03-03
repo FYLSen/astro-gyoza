@@ -8,6 +8,7 @@ Disallow: /_astro/
 Disallow: /fonts/
 
 Sitemap: ${new URL('sitemap-index.xml', import.meta.env.SITE).href}
+Sitemap: ${new URL('gallery/sitemap.xml', import.meta.env.SITE).href}
 `.trim()
 
 export const GET: APIRoute = () => {

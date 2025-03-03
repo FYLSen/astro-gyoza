@@ -19,6 +19,22 @@
   font-display: swap;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin !important;
+  -ms-overflow-style: auto !important;
+  &::-webkit-scrollbar {
+    display: block !important;
+  }
+}
+
 ::selection {
   background-color: theme('colors.accent');
   color: white;

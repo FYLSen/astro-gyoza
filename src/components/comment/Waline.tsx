@@ -10,13 +10,14 @@ export function Waline({ serverURL }: { serverURL: string }) {
       el: ref.current,
       serverURL,
       dark: "[data-theme='dark']",
-      login: 'force',
+      login: 'enable',
       imageUploader: false,
       search: false,
+      reaction: [],
       locale: {
         placeholder: '发条友善的评论吧（支持 Markdown 语法）…',
       },
-      emoji: ['//unpkg.com/@waline/emojis@1.1.0/bilibili'],
+      emoji: ['//unpkg.com/@waline/emojis@1.2.0/bmoji'],
     })
 
     return () => {

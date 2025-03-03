@@ -11,20 +11,43 @@ function useActiveItem() {
   useEffect(() => {
     const $article = document.querySelector('#markdown-wrapper')
     if (!$article) return
-    const $headings = Array.from($article.querySelectorAll('h1,h2,h3,h4,h5,h6'))
-    for (let i = 0; i < $headings.length; i++) {
-      const item = $headings[i]
-      const nextItem = $headings[i + 1]
-      const itemTop = item.getBoundingClientRect().top
-      const nextItemTop = nextItem ? nextItem.getBoundingClientRect().top : 10000
 
-      if (itemTop <= 80 && nextItemTop > 80) {
-        startTransition(() => {
-          setActiveItem(item.id)
-        })
+    const $headings = Array.from($article.querySelectorAll('h1,h2,h3,h4,h5,h6'))
+    if ($headings.length === 0) return
+
+    // Get the absolute positions of headings relative to the document
+    const headingPositions = $headings.map((heading) => {
+      const rect = heading.getBoundingClientRect()
+      return {
+        id: heading.id,
+        top: rect.top + window.scrollY,
+      }
+    })
+
+    // Find the active heading based on scroll position
+    const currentPosition = window.scrollY + 80 // 80px offset for header
+    let activeId = headingPositions[0].id
+
+    for (let i = 0; i < headingPositions.length; i++) {
+      const current = headingPositions[i]
+      const next = headingPositions[i + 1]
+
+      if (!next) {
+        if (currentPosition >= current.top) {
+          activeId = current.id
+        }
+        break
+      }
+
+      if (currentPosition >= current.top && currentPosition < next.top) {
+        activeId = current.id
         break
       }
     }
+
+    startTransition(() => {
+      setActiveItem(activeId)
+    })
   }, [scrollY])
 
   return activeItem

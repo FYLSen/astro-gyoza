@@ -1,14 +1,14 @@
-# Gyoza
+# Gyoza-Lucide
 
-Gyoza is a static blog template built with Astro and React.
+Gyoza-Lucide is a static blog template built with Astro and React.
 
-![astro version](https://img.shields.io/badge/astro-4.6-red)
+![astro version](https://img.shields.io/badge/astro-5.2.5-yellow)
 ![node version](https://img.shields.io/badge/node-18.18-green)
 
 Demo Site:
 
-- [gyoza.lxchapu.com](https://gyoza.lxchapu.com)
-- [www.lxchapu.com](https://www.lxchapu.com)
+- [gyoza.fylsen.com](https://gyoza.fylsen.com)
+- [fylsen.com](https://fylsen.com)
 
 Enjoy it!
 
@@ -34,10 +34,11 @@ Enjoy it!
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Framer Motion](https://www.framer.com/motion/)
 - [Jotai](https://jotai.org/)
+- [Lucide](https://lucide.dev/)
 
 ## 📖 Documentation
 
-前往：[Documentation](https://gyoza.lxchapu.com/posts/guide)
+前往：[Documentation](https://gyoza.fylsen.com/posts/guide)
 
 ## 🚀 Project Structure
 

@@ -9,60 +9,64 @@ import SectionBlock from '@/components/SectionBlock.astro'
 import MarkdownWrapper from '@/components/MarkdownWrapper.astro'
 import FriendList from '@/components/FriendList.astro'
 import ProjectList from '@/components/ProjectList.astro'
+import SayingsGridContainer from '@/components/sayings/SayingsGridContainer.astro'
 import { ReadingProgress } from '@/components/post/ReadingProgress'
 import { PostToc } from '@/components/post/PostToc'
 import { Comments } from '@/components/comment'
+import { TypewriterText } from '@/components/TypewriterText'
 
 export const getStaticPaths = (async () => {
   const specList = await getCollection('spec')
 
-  return specList.map((md) => ({
-    params: { spec: md.slug },
+  return specList.map((entry) => ({
+    params: { spec: entry.slug },
     props: {
-      md,
+      entry,
     },
   }))
 }) satisfies GetStaticPaths
 
 interface Props {
-  md: CollectionEntry<'spec'>
+  entry: CollectionEntry<'spec'>
 }
 
-const { md } = Astro.props
+const { entry } = Astro.props
+const { Content, headings } = await entry.render()
 
-const { headings, Content } = await md.render()
-
-const isPageLayout = ['friends', 'projects', 'sayings'].includes(md.slug)
-const isMdContentEmpty = md.body.trim().length === 0
+const isPageLayout = ['friends', 'projects', 'sayings'].includes(entry.slug)
+const isMdContentEmpty = !entry.body?.trim().length
 ---
 
 {
   isPageLayout ? (
-    <PageLayout title={md.data.title} description={md.data.description}>
+    <PageLayout title={entry.data.title} description={entry.data.description}>
       <div class="max-w-[800px] mx-auto px-4 py-16 space-y-8" data-pagefind-body>
         <header class="space-y-4">
           <h1 class="text-4xl font-bold">
-            <Highlight>{md.data.title}</Highlight>
+            <Highlight>{entry.data.title}</Highlight>
           </h1>
-          <p>{md.data.description}</p>
+          <p>
+            <TypewriterText text={entry.data.description} speed={40} delay={0.1} client:load />
+          </p>
         </header>
-        {md.slug === 'friends' && <FriendList />}
-        {md.slug === 'projects' && <ProjectList />}
+        {entry.slug === 'friends' && <FriendList />}
+        {entry.slug === 'projects' && <ProjectList />}
+        {entry.slug === 'sayings' && <SayingsGridContainer />}
         {!isMdContentEmpty && (
           <MarkdownWrapper>
             <Content />
           </MarkdownWrapper>
         )}
-        {md.data.comments && <Comments />}
+        {entry.data.comments && <Comments />}
       </div>
     </PageLayout>
   ) : (
     <MarkdownLayout
-      title={md.data.title}
-      description={md.data.description}
-      mdTitle={md.data.title}
-      mdDescription={md.data.description}
-      mdSlug={md.slug}
+      title={entry.data.title}
+      description={entry.data.description}
+      mdTitle={entry.data.title}
+      mdDescription={entry.data.description}
+      mdSlug={entry.slug}
     >
       <div
         class="max-w-[1100px] mx-auto px-4 md:px-8 py-16 grid lg:grid-cols-[auto_260px] gap-8"
@@ -71,9 +75,11 @@ const isMdContentEmpty = md.body.trim().length === 0
         <div>
           <header class="space-y-4">
             <h1 class="text-4xl font-bold">
-              <Highlight>{md.data.title}</Highlight>
+              <Highlight>{entry.data.title}</Highlight>
             </h1>
-            <p>{md.data.description}</p>
+            <p>
+              <TypewriterText text={entry.data.description} speed={40} delay={0.1} client:load />
+            </p>
           </header>
         </div>
         <div class="col-start-1 min-w-0">
@@ -90,7 +96,7 @@ const isMdContentEmpty = md.body.trim().length === 0
             </SectionBlock>
           </aside>
         </div>
-        {md.data.comments && <Comments />}
+        {entry.data.comments && <Comments />}
       </div>
     </MarkdownLayout>
   )

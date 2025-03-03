@@ -1,0 +1,37 @@
+---
+import { site, gallery } from '@/config.json'
+import PageLayout from '@/layouts/PageLayout.astro'
+import { GalleryWrapper } from '@/components/gallery/GalleryWrapper'
+import Highlight from '@/components/Highlight.astro'
+import { TypewriterText } from '@/components/TypewriterText'
+import { RssCopyButton } from '@/components/CopyLink'
+import { getCollection } from 'astro:content'
+
+// 获取照片数据
+const photosCollection = await getCollection('photos')
+const allPhotos = photosCollection.flatMap((entry) => entry.data)
+const sortedPhotos = allPhotos.sort(
+  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+)
+
+const rssUrl = new URL('gallery/rss.xml', site.url).href
+---
+
+<PageLayout title={`${gallery.subtitle}@${gallery.title}`}>
+  <div class="px-4 py-16">
+    <div class="max-w-[800px] mx-auto mb-12">
+      <header class="space-y-4 mb-8">
+        <h1 class="text-4xl font-bold">
+          <Highlight>{gallery.title}</Highlight>
+          <RssCopyButton client:load url={rssUrl} />
+        </h1>
+        <p><TypewriterText text={gallery.description} speed={40} delay={0.1} client:load /></p>
+        <hr class="w-[100px] border-primary" />
+      </header>
+    </div>
+
+    <div class="w-[90%] mx-auto">
+      <GalleryWrapper initialPhotos={sortedPhotos} client:load />
+    </div>
+  </div>
+</PageLayout>

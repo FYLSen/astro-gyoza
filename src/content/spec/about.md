@@ -28,3 +28,4 @@ Gyoza 是开源的，如果你对这个项目感兴趣，欢迎前往 Gyoza 的 
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Framer Motion](https://www.framer.com/motion/)
 - [Jotai](https://jotai.org/)
+- [Lucide](https://lucide.dev/)

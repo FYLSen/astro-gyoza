@@ -30,3 +30,19 @@ summary: 这篇文章介绍了如何在文章中嵌入视频和代码。
 ```
 
 ::bilibili{#BV1Mx4y1Y7pJ}
+
+## 本地视频
+
+```md
+::video{src="/spirited-away.mp4" poster="/images/poster.jpg" loop=true muted=true autoplay=true}
+```
+
+::video{src="/spirited-away.mp4" poster="/sunflower.jpg"}
+
+## 音频
+
+```md
+::audio{src="/cyclone.mp4" loop=true autoplay=true}
+```
+
+::audio{src="/cyclone.mp4"}

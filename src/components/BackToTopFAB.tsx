@@ -34,7 +34,7 @@ export function BackToTopFAB() {
 
 function BackToTop() {
   const controls = useAnimation()
-  
+
   const handleBackToTop = () => {
     window.scrollTo({
       top: 0,
@@ -54,10 +54,7 @@ function BackToTop() {
       onMouseEnter={() => controls.start('animate')}
       onMouseLeave={() => controls.start('normal')}
     >
-      <motion.div
-        variants={variants}
-        animate={controls}
-      >
+      <motion.div variants={variants} animate={controls}>
         <Rocket size={16} className="transform -rotate-45" />
       </motion.div>
     </motion.button>

@@ -245,3 +245,42 @@ Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and ot
 ```
 
 正常情况下，该内容会隐藏 ||hide content||，鼠标悬浮时才会显示。
+
+## Front Matter
+
+```yaml
+---
+title: 文章标题
+date: 发布日期
+lastMod: 最后修改日期
+summary: 文章的摘要信息
+category: 分类
+tags: 标签
+comments: 是否启用评论（true、false）
+password: 文章是否加启用密码
+aisummary: 是否启用AI摘要(true、false)
+license:
+  name: 分发协议名称
+  url: 协议地址
+  description: 协议描述
+---
+```
+
+```yaml
+---
+title: 这是文章标题
+date: 2024-01-01
+lastMod: 2025-01-01
+summary: 这是一篇Markdown文档的使用指南
+category: 教程
+tags: ['markdown', '教程']
+comments: true
+password: '123456'
+aisummary: true
+sticky: 1
+license:
+  name: '版权所有 (All Rights Reserved)'
+  url: ''
+  description: 版权所有，仅供阅读。未经许可，禁止转载、复制、分发、修改或创作衍生作品。如需转载请联系站长获得授权。
+---
+```

@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content'
+import SayingsGrid from './SayingsGrid'
+
+const allSayings = await getCollection('sayings')
+
+const sortedSayings = allSayings
+  .flatMap((doc) => {
+    const sayingsArray = Object.entries(doc.data.sayings).map(([_, saying]) => saying)
+    return sayingsArray
+  })
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+
+const totalCount = sortedSayings.length
+const initialCount = 12
+---
+
+<SayingsGrid
+  client:load
+  sayings={sortedSayings}
+  totalCount={totalCount}
+  initialCount={initialCount}
+/>

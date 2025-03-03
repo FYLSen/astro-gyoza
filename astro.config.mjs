@@ -1,22 +1,23 @@
 import { defineConfig } from 'astro/config'
-import { remarkReadingTime } from './src/plugins/remarkReadingTime'
-import { rehypeCodeBlock } from './src/plugins/rehypeCodeBlock'
-import { rehypeTableBlock } from './src/plugins/rehypeTableBlock'
-import { rehypeCodeHighlight } from './src/plugins/rehypeCodeHighlight'
-import { rehypeImage } from './src/plugins/rehypeImage'
-import { rehypeLink } from './src/plugins/rehypeLink'
-import { rehypeHeading } from './src/plugins/rehypeHeading'
+import { remarkReadingTime } from './src/plugins/remarkReadingTime.js'
+import { rehypeCodeBlock } from './src/plugins/rehypeCodeBlock.js'
+import { rehypeTableBlock } from './src/plugins/rehypeTableBlock.js'
+import { rehypeCodeHighlight } from './src/plugins/rehypeCodeHighlight.js'
+import { rehypeImage } from './src/plugins/rehypeImage.js'
+import { rehypeLink } from './src/plugins/rehypeLink.js'
+import { rehypeHeading } from './src/plugins/rehypeHeading.js'
+import { rehypeEncryption } from './src/plugins/rehypeEncryption.js'
 import remarkDirective from 'remark-directive'
-import { remarkSpoiler } from './src/plugins/remarkSpoiler'
-import { remarkEmbed } from './src/plugins/remarkEmbed'
+import { remarkSpoiler } from './src/plugins/remarkSpoiler.js'
+import { remarkEmbed } from './src/plugins/remarkEmbed.js'
 import tailwind from '@astrojs/tailwind'
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import { rehypeHeadingIds } from '@astrojs/markdown-remark'
-import { site } from './src/config.json'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 import swup from '@swup/astro'
+import { site } from './src/config.json' assert { type: 'json' }
 
 // https://astro.build/config
 export default defineConfig({
@@ -45,8 +46,13 @@ export default defineConfig({
       rehypeCodeBlock,
       rehypeCodeHighlight,
       rehypeTableBlock,
+      [rehypeEncryption, {}],
     ],
-    remarkRehype: { footnoteLabel: '参考', footnoteBackLabel: '返回正文' },
+    remarkRehype: {
+      footnoteLabel: '参考',
+      footnoteBackLabel: '返回正文',
+      passThrough: ['yaml'],
+    },
   },
   vite: {
     build: {

@@ -100,7 +100,7 @@ function ShareModal({ url, text }: { url: string; text: string }) {
                 <LucideIcon
                   name={item.icon as iconName}
                   size={16}
-                  className="inline-block -translate-y-1"
+                  className="inline-block translate-y-1"
                 />
                 <span>{item.name}</span>
               </li>

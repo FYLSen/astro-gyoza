@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 import { getShortDate } from '@/utils/date'
-import { Pin } from 'lucide-astro'
+import TimelineComponent from '@/components/Timeline'
 
 interface Props {
   posts: CollectionEntry<'posts'>[]
@@ -9,55 +9,58 @@ interface Props {
 
 const { posts } = Astro.props
 
-const groupedPosts = posts.reduce<
-  {
-    year: number
-    posts: CollectionEntry<'posts'>[]
+// 确保分组数据符合 Timeline 组件的类型要求
+type GroupedPosts = {
+  year: number
+  months: Set<number>
+  posts: {
+    slug: string
+    title: string
+    date: string
+    month: number
+    password?: boolean
+    sticky?: number
   }[]
->((acc, cur) => {
+}[]
+
+const groupedPosts = posts.reduce<GroupedPosts>((acc, cur) => {
   const year = cur.data.date.getFullYear()
+  const month = cur.data.date.getMonth()
   const lastYearGroup = acc[acc.length - 1]
   if (lastYearGroup && lastYearGroup.year === year) {
-    lastYearGroup.posts.push(cur)
+    lastYearGroup.months.add(month)
+    lastYearGroup.posts.push({
+      slug: cur.slug,
+      title: cur.data.title,
+      date: getShortDate(cur.data.date),
+      month,
+      password: !!cur.data.password,
+      sticky: cur.data.sticky || undefined,
+    })
   } else {
     acc.push({
       year,
-      posts: [cur],
+      months: new Set([month]),
+      posts: [
+        {
+          slug: cur.slug,
+          title: cur.data.title,
+          date: getShortDate(cur.data.date),
+          month,
+          password: !!cur.data.password,
+          sticky: cur.data.sticky || undefined,
+        },
+      ],
     })
   }
   return acc
 }, [])
+
+// 将 Set 转换为数组以便传递给组件，并按月份倒序排序
+const processedGroupedPosts = groupedPosts.map((group) => ({
+  ...group,
+  months: Array.from(group.months).sort((a, b) => b - a),
+}))
 ---
 
-<section>
-  {
-    groupedPosts.map((year) => (
-      <div class="relative py-10">
-        <h3
-          class="absolute -top-3 -left-8 text-[7rem] text-transparent leading-none font-bold pointer-events-none select-none font-['Atkinson']"
-          style="-webkit-text-stroke: 2px rgb(var(--color-text-primary) / 0.1);"
-        >
-          {year.year}
-        </h3>
-        <ul class="space-y-4">
-          {year.posts.map((post) => (
-            <li class="flex items-baseline space-x-2">
-              <span class="shrink-0 text-gray-600 dark:text-gray-300 text-sm">
-                {getShortDate(post.data.date)}
-              </span>
-              <a
-                class="hover:text-accent/80 hover:underline underline-offset-2"
-                href={`/posts/${post.slug}`}
-              >
-                {post.data.title}
-              </a>
-              {post.data.sticky > 0 && (
-                <Pin size={16} class="text-accent transform rotate-45 translate-y-0.5" />
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
-    ))
-  }
-</section>
+<TimelineComponent client:load groupedPosts={processedGroupedPosts} />

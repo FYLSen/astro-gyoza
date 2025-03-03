@@ -20,10 +20,10 @@ function UmamiAnalytics({ serverUrl, websiteId }: { serverUrl?: string; websiteI
 
 function GoogleAnalytics({
   measurementId,
-  config: { method, endpoint } = {},
+  config: { fallback, endpoint } = {},
 }: {
   measurementId: string
-  config?: { method?: string; endpoint?: string }
+  config?: { fallback?: boolean; endpoint?: string }
 }) {
   if (endpoint) {
     return (
@@ -31,13 +31,13 @@ function GoogleAnalytics({
         <script
           dangerouslySetInnerHTML={{
             __html: `window.minimalAnalytics = {
-    trackingId: '${measurementId}',
-    analyticsEndpoint: '${endpoint}',
-    defineGlobal: false,
-    autoTrack: true,};`,
+trackingId: '${measurementId}',
+analyticsEndpoint: '${endpoint}',
+defineGlobal: false,
+autoTrack: true,};`,
           }}
         ></script>
-        <script async defer src={`${endpoint}?method=${method}`}></script>
+        <script src={`${endpoint}?fallback=${fallback}`} async></script>
       </>
     )
   }

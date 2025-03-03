@@ -1,8 +1,10 @@
 ---
+import { hero } from '@/config.json'
 import Layout from '@/layouts/Layout.astro'
 import MoonPhase from '@/components/MoonPhase'
 import { getCurrentMoonPhase } from '@/utils/moonPhase'
 import { ArrowUpLeft } from 'lucide-astro'
+import { TypewriterText } from '@/components/TypewriterText'
 
 const currentPhase = getCurrentMoonPhase()
 ---
@@ -27,27 +29,30 @@ const currentPhase = getCurrentMoonPhase()
             404
           </h1>
 
-          <p
-            class="text-xl leading-normal my-4 mb-8 text-primary
-                    drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]
-                    md:text-xl sm:text-base"
-          >
-            天宽地阔，岁久时长，一隅之安，岂能彼之所欲？
-          </p>
+          <div class="max-w-xl">
+            <p
+              class="text-xl leading-normal text-primary
+                     drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]
+                     md:text-lg sm:text-base"
+            >
+              <TypewriterText text={hero.yiyan} speed={40} delay={0.1} client:load />
+            </p>
 
-          <a
-            href="/"
-            class="inline-flex items-center whitespace-nowrap cursor-pointer tracking-wider text-sm
-                            border-2 border-primary leading-9 text-center h-9 px-6 rounded-full
-                            text-primary transition-all duration-300 ease-in-out backdrop-blur-sm
-                            hover:bg-primary hover:text-root hover:-translate-y-0.5
-                            hover:shadow-[0_5px_15px_rgba(255,255,255,0.1)]
-                            md:text-sm md:leading-9 md:h-9 md:px-6 md:rounded-full
-                            sm:text-xs sm:leading-7 sm:h-7 sm:px-4 sm:rounded-[14px]"
-          >
-            <ArrowUpLeft size={14} class="inline-block mr-2" />
-            返回首页
-          </a>
+            <a
+              href="/"
+              class="mt-20 inline-flex items-center whitespace-nowrap cursor-pointer tracking-wider text-sm
+                      border-2 border-primary leading-9 h-9 px-4
+                      text-primary transition-all duration-300 ease-in-out backdrop-blur-sm
+                      hover:bg-primary hover:text-root hover:-translate-y-0.5
+                      hover:shadow-[0_5px_15px_rgba(255,255,255,0.1)]
+                      rounded-full
+                      md:text-sm md:leading-9 md:h-9
+                      sm:text-xs sm:leading-7 sm:h-7 sm:rounded-[14px]"
+            >
+              <ArrowUpLeft size={14} class="inline-block mr-1" />
+              返回首页
+            </a>
+          </div>
         </div>
       </div>
     </div>

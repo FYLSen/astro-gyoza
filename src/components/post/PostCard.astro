@@ -2,7 +2,7 @@
 import type { CollectionEntry } from 'astro:content'
 import { PostCardHoverOverlay } from './PostCardHoverOverlay'
 import PostMetaInfo from './PostMetaInfo.astro'
-import { Pin } from 'lucide-astro'
+import { Lock, Pin } from 'lucide-astro'
 
 interface Props {
   entry: CollectionEntry<'posts'>
@@ -15,13 +15,12 @@ const { remarkPluginFrontmatter } = await entry.render()
 
 <a class="block relative py-8 focus-visible:outline-0" href={`/posts/${entry.slug}`}>
   <PostCardHoverOverlay client:only="react" />
-  <h2 class="relative text-2xl font-bold">
-    {entry.data.title}
-    {
-      entry.data.sticky > 0 && (
-        <Pin size={16} class="absolute right-0 top-0 z-10 text-accent transform rotate-45" />
-      )
-    }
+  <h2 class="relative text-2xl font-bold group">
+    <span>{entry.data.title}</span>
+    <div class="absolute top-0 right-0 z-10 flex items-center gap-2 text-accent">
+      {entry.data.password && <Lock size={16} />}
+      {entry.data.sticky > 0 && <Pin size={16} class="transform rotate-45" />}
+    </div>
   </h2>
   <div class="mt-4 overflow-hidden">
     {

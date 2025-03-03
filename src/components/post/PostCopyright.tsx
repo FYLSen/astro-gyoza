@@ -1,32 +1,37 @@
 import { author, site } from '@/config.json'
-import { getFormattedDateTime } from '@/utils/date'
+import { getFormattedShortDate } from '@/utils/date'
 import { AnimatedSignature } from '../AnimatedSignature'
 import { useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
+import config from '@/config.json'
+import { CopyLink } from '@/components/CopyLink'
 
 function getPostUrl(slug: string) {
   return new URL(slug, site.url).href
+}
+
+interface License {
+  name: string
+  url?: string
+  description: string
 }
 
 export function PostCopyright({
   title,
   slug,
   lastMod,
+  license,
 }: {
   title: string
   slug: string
   lastMod: Date
+  license?: License
 }) {
   const [lastModStr, setLastModStr] = useState('')
   const url = getPostUrl(slug)
-
-  function handleCopyUrl() {
-    navigator.clipboard.writeText(url)
-    toast.success('已复制文章链接')
-  }
+  const currentLicense = license || config.license
 
   useEffect(() => {
-    setLastModStr(getFormattedDateTime(lastMod))
+    setLastModStr(getFormattedShortDate(lastMod))
   }, [lastMod])
 
   return (
@@ -35,9 +40,9 @@ export function PostCopyright({
       <p>文章作者：{author.name}</p>
       <p>
         <span>文章链接：{url}</span>
-        <span role="button" className="cursor-pointer select-none" onClick={handleCopyUrl}>
-          &nbsp; [复制]
-        </span>
+        <CopyLink url={url} successMessage="已复制文章链接">
+          <span className="ml-2">[复制]</span>
+        </CopyLink>
       </p>
       <p>最后修改时间：{lastModStr}</p>
       <hr className="my-3 border-primary" />
@@ -46,18 +51,24 @@ export function PostCopyright({
           <AnimatedSignature />
         </div>
         <p>
-          商业转载请联系站长获得授权，非商业转载请注明本文出处及文章链接，您可以自由地在任何媒体以任何形式复制和分发作品，也可以修改和创作，但是分发衍生作品时必须采用相同的许可协议。
+          {currentLicense.description}
           <br />
-          本文采用
-          <a
-            className="hover:underline hover:text-accent underline-offset-2"
-            href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            CC BY-NC-SA 4.0
-          </a>
-          进行许可。
+          {currentLicense.url ? (
+            <>
+              本文采用
+              <a
+                className="hover:underline hover:text-accent underline-offset-2"
+                href={currentLicense.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {currentLicense.name}
+              </a>
+              进行许可。
+            </>
+          ) : (
+            <>本文遵循 {currentLicense.name}。</>
+          )}
         </p>
       </div>
     </section>

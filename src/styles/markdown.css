@@ -145,11 +145,11 @@
 }
 
 .markdown .spoiler {
-  @apply bg-current rounded transition-bg-color not-italic;
+  @apply rounded inline blur-sm;
 }
 
 .markdown .spoiler:hover {
-  @apply bg-transparent;
+  @apply blur-none transition-all duration-200 not-italic;
 }
 
 .markdown h2 + * {

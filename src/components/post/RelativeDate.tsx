@@ -1,8 +1,8 @@
-import { getRelativeTime, getFormattedDate } from '@/utils/date'
+import { getRelativeTime, getFormattedShortDate } from '@/utils/date'
 import { useEffect, useState } from 'react'
 
 export function RelativeDate({ date }: { date: Date }) {
-  const [dateStr, setDateStr] = useState(getFormattedDate(date))
+  const [dateStr, setDateStr] = useState(getFormattedShortDate(date))
 
   useEffect(() => {
     const relative = getRelativeTime(date)

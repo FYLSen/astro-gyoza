@@ -11,33 +11,42 @@
   "author": {
     "name": "lxchapu",
     "twitterId": "@lxchapu",
-    "avatar": "https://s2.loli.net/2024/04/30/ozsnuS5Ihf3xMBG.webp"
+    "avatar": "https://s2.loli.net/2024/04/30/ozsnuS5Ihf3xMBG.webp",
+    "secret": "留下个密语"
   },
   "hero": {
     "name": "Gyoza-Lucide",
     "bio": "A static blog template build with Astro and React.",
     "description": "Clean, Cute, Fast.",
+    "yiyan": "当第一颗卫星飞向大气层外，我们便以为自己终有一日会征服宇宙。",
     "socials": [
       {
         "name": "Github",
-        "icon": "Github",
-        "url": "https://github.com/lxchapu/astro-gyoza",
+        "icon": "/logos/github.svg",
+        "url": "https://github.com/FYLSen",
         "color": "rgb(24, 23, 23)"
       },
       {
         "name": "X",
-        "icon": "Twitter",
-        "url": "https://twitter.com/lxchapu",
+        "icon": "/logos/x.svg",
+        "url": "https://x.com/FYLSen",
         "color": "rgb(36, 46, 54)"
       },
       {
+        "name": "Mastodon",
+        "icon": "/logos/mastodon.svg",
+        "url": "https://o3o.ca/@FYLSen",
+        "color": "rgb(23, 6, 59)"
+      },
+      {
         "name": "Email",
-        "icon": "Mail",
-        "url": "mailto:lxchapu@outlook.com",
+        "icon": "/logos/mail.svg",
+        "url": "mailto:some@fylsen.com",
         "color": "rgb(212, 70, 56)"
       }
     ],
-    "yiyan": "当第一颗卫星飞向大气层外，我们便以为自己终有一日会征服宇宙。"
+    "first": "林花谢了春红，太匆匆。",
+    "last": "无奈朝来寒雨，晚来风。"
   },
   "color": {
     "accent": [
@@ -81,6 +90,16 @@
       "icon": "Presentation"
     },
     {
+      "name": "相册",
+      "link": "/gallery",
+      "icon": "GalleryVertical"
+    },
+    {
+      "name": "语录",
+      "link": "/sayings",
+      "icon": "BookOpenCheck"
+    },
+    {
       "name": "关于",
       "link": "/about",
       "icon": "AtSign"
@@ -103,13 +122,18 @@
   "sponsor": {
     "wechat": "https://object.lxchapu.com/bed%2F2024%2F0507_6e3e8f73df2d4e6d.webp"
   },
+  "gallery": {
+    "title": "照片墙",
+    "subtitle": "故事",
+    "description": "生活痕迹。"
+  },
   "analytics": {
     "enable": true,
     "google": {
       "measurementId": "G-RV6B7CSFQ0",
       "config": {
-        "method": "get",
-        "endpoint": "https://img.vibecho.com/gcollect*"
+        "fallback": true,
+        "endpoint": "https://img.vibecho.com/gcollect"
       }
     },
     "umami": {
@@ -123,12 +147,16 @@
   "follow": {
     "enable": false,
     "feedId": "",
+    "galleryFeedId": "",
     "userId": ""
   },
-  "adsense": {
-    "enable": true,
-    "google": {
-      "client": "ca-pub-8800087783186213"
-    }
+  "AIConfig": {
+    "enable": false,
+    "api": ""
+  },
+  "license": {
+    "name": "CC BY-NC-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh",
+    "description": "商业转载请联系站长获得授权，非商业转载请注明本文出处及文章链接，您可以自由地在任何媒体以任何形式复制和分发作品，也可以修改和创作，但是分发衍生作品时必须采用相同的许可协议。"
   }
 }

@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import scrollbarPlugin from 'tailwind-scrollbar'
 
 const config: Config = {
   content: ['./src/**/*.{astro,ts,tsx,js,jsx}'],
@@ -31,6 +32,10 @@ const config: Config = {
     extend: {
       colors: {
         accent: 'rgb(var(--color-accent) / <alpha-value>)',
+        scrollbar: {
+          light: '#cbd5e1',
+          dark: '#475569',
+        },
       },
       textColor: {
         primary: 'rgb(var(--color-text-primary))',
@@ -58,12 +63,18 @@ const config: Config = {
           from: { filter: 'hue-rotate(0deg)' },
           to: { filter: 'hue-rotate(-360deg)' },
         },
+        blink: {
+          'from, to': { opacity: '1' },
+          '50%': { opacity: '0' },
+        },
       },
       animation: {
         hue: 'hue 10s linear infinite',
+        blink: 'blink 1s step-end infinite',
       },
     },
   },
+  plugins: [scrollbarPlugin({ nocompatible: true })],
 }
 
 export default config

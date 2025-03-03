@@ -1,9 +1,6 @@
 import clsx from 'clsx'
 import { hero } from '@/config.json'
 import { motion } from 'framer-motion'
-import { icons } from 'lucide-react'
-
-type iconName = keyof typeof icons
 
 const itemVariants = {
   hidden: {
@@ -42,15 +39,16 @@ export function SocialList({ className }: { className?: string }) {
               className="absolute inset-0 -z-1 rounded-full group-hover:scale-105 transition"
               style={{ backgroundColor: social.color }}
             ></span>
-            <LucideIcon name={social.icon as iconName} size={16} />
+            <img
+              src={social.icon}
+              alt={social.name}
+              className="size-4 filter brightness-0 invert-[1]"
+              width={16}
+              height={16}
+            />
           </a>
         </motion.li>
       ))}
     </motion.ul>
   )
-}
-
-const LucideIcon = ({ name, size }: { name: iconName; size?: number }) => {
-  const Icon = icons[name]
-  return <Icon size={size} />
 }
