@@ -3,12 +3,9 @@ import { hero } from '@/config.json'
 import Layout from '@/layouts/Layout.astro'
 import MoonPhase from '@/components/MoonPhase'
 import { ArrowUpLeft } from 'lucide-astro'
-import SplashCursor from '@/components/SplashCursor'
-import { FadeContent } from '@/components/FadeContent'
 ---
 
 <Layout title="404">
-  <SplashCursor client:only="react" />
   <div class="flex items-center justify-center min-h-screen dark:bg-neutral-700">
     <div class="container mx-auto px-8">
       <div
@@ -29,16 +26,11 @@ import { FadeContent } from '@/components/FadeContent'
           </h1>
 
           <div class="max-w-xl lg:mx-0 mx-auto">
-            <FadeContent
-              blur={true}
-              duration={1800}
-              easing="ease-out"
-              delay={300}
-              threshold={0.3}
-              initialOpacity={0.3}
-              className="text-l text-secondary mt-3 text-center lg:text-left drop-shadow-[0_0_10px_rgba(255,255,255,0.2)] break-words"
-              client:only="react">{hero.yiyan}</FadeContent
+            <p
+              class="text-l text-secondary mt-3 text-center lg:text-left drop-shadow-[0_0_10px_rgba(255,255,255,0.2)] break-words"
             >
+              {hero.yiyan}
+            </p>
 
             <div class="flex justify-center lg:justify-start">
               <a
