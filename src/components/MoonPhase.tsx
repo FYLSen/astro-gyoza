@@ -1,13 +1,20 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import type { MoonPhaseConfig } from '@/utils/moonPhase'
+import { getCurrentMoonPhase } from '@/utils/moonPhase'
 
-interface MoonPhaseProps {
-  phaseConfig: MoonPhaseConfig
-}
-
-export default function MoonPhase({ phaseConfig }: MoonPhaseProps) {
+export default function MoonPhase() {
   const [isDescriptionVisible, setIsDescriptionVisible] = useState(false)
+  const [phaseConfig, setPhaseConfig] = useState<MoonPhaseConfig | null>(null)
+
+  useEffect(() => {
+    const currentPhase = getCurrentMoonPhase()
+    setPhaseConfig(currentPhase)
+  }, [])
+
+  if (!phaseConfig) {
+    return <div className="w-[180px] h-[180px] rounded-full bg-neutral-100/10 animate-pulse"></div>
+  }
 
   return (
     <div className="relative mb-8 group flex flex-col items-center">
