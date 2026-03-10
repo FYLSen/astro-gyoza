@@ -1,23 +1,43 @@
 ---
 import { getCollection } from 'astro:content'
 import SayingsGrid from './SayingsGrid'
+import type { SayingCard } from './SayingsGrid'
+import { site } from '@/config.json'
 
 const allSayings = await getCollection('sayings')
 
 const sortedSayings = allSayings
   .flatMap((doc) => {
-    const sayingsArray = Object.entries(doc.data.sayings).map(([_, saying]) => saying)
+    const sayingsArray = doc.data.sayings as SayingCard[]
     return sayingsArray
   })
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
 const totalCount = sortedSayings.length
 const initialCount = 12
+
+const structuredData = sortedSayings.map((saying) => ({
+  '@context': 'https://schema.org/',
+  '@type': 'ImageObject',
+  contentUrl: saying.illustration,
+  license: new URL('license', site.url).href,
+  acquireLicensePage: new URL('about', site.url).href,
+  creditText: site.title,
+  creator: {
+    '@type': 'Person',
+    name: saying.author || '',
+  },
+  copyrightNotice: `This image is copyrighted and belongs to ${site.url || ''}.`,
+  datePublished: saying.date,
+  description: saying.content || '',
+}))
 ---
 
 <SayingsGrid
-  client:load
+  client:only="react"
   sayings={sortedSayings}
   totalCount={totalCount}
   initialCount={initialCount}
 />
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />

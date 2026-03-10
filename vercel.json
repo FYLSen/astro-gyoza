@@ -1,0 +1,570 @@
+{
+  "version": 2,
+  "redirects": [
+    {
+      "source": "/posts/setup-mingw64-msys-environment-on-64-bit-windows-7",
+      "destination": "/posts/2014/02/setup-mingw64-msys-environment-on-64-bit-windows-7/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/setup-mingw64-msys-environment-on-64-bit-windows-7/",
+      "destination": "/posts/2014/02/setup-mingw64-msys-environment-on-64-bit-windows-7/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/fading-sunset-new-journey",
+      "destination": "/posts/2025/02/fading-sunset-new-journey/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/fading-sunset-new-journey/",
+      "destination": "/posts/2025/02/fading-sunset-new-journey/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/i-support-who-you-want-to-be",
+      "destination": "/posts/2025/01/i-support-who-you-want-to-be/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/i-support-who-you-want-to-be/",
+      "destination": "/posts/2025/01/i-support-who-you-want-to-be/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/within-the-circle",
+      "destination": "/posts/2025/01/within-the-circle/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/within-the-circle/",
+      "destination": "/posts/2025/01/within-the-circle/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/memorable-old-movies-in-my-memory",
+      "destination": "/posts/2025/01/memorable-old-movies-in-my-memory/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/memorable-old-movies-in-my-memory/",
+      "destination": "/posts/2025/01/memorable-old-movies-in-my-memory/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/before-snake-year-2025",
+      "destination": "/posts/2025/01/before-snake-year-2025/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/before-snake-year-2025/",
+      "destination": "/posts/2025/01/before-snake-year-2025/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/self-hosted-blogs-not-friendly-choice",
+      "destination": "/posts/2025/01/self-hosted-blogs-not-friendly-choice/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/self-hosted-blogs-not-friendly-choice/",
+      "destination": "/posts/2025/01/self-hosted-blogs-not-friendly-choice/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/a-step-by-step-guide-deploying-hysteria2-on-ubuntu",
+      "destination": "/posts/2024/03/a-step-by-step-guide-deploying-hysteria2-on-ubuntu/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/a-step-by-step-guide-deploying-hysteria2-on-ubuntu/",
+      "destination": "/posts/2024/03/a-step-by-step-guide-deploying-hysteria2-on-ubuntu/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/ubuntu-snell-server-setup",
+      "destination": "/posts/2024/03/ubuntu-snell-server-setup/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/ubuntu-snell-server-setup/",
+      "destination": "/posts/2024/03/ubuntu-snell-server-setup/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/send-emails-using-gmail-alias-custom-domain",
+      "destination": "/posts/2024/03/send-emails-using-gmail-alias-custom-domain/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/send-emails-using-gmail-alias-custom-domain/",
+      "destination": "/posts/2024/03/send-emails-using-gmail-alias-custom-domain/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/surge-http-rewrite-application-case-access-cloudflare-workers-cronbin-without-password",
+      "destination": "/posts/2024/04/surge-http-rewrite-application-case-access-cloudflare-workers-cronbin-without-password/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/surge-http-rewrite-application-case-access-cloudflare-workers-cronbin-without-password/",
+      "destination": "/posts/2024/04/surge-http-rewrite-application-case-access-cloudflare-workers-cronbin-without-password/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/complete-guide-to-chatgpt-practical-start-and-security-strategies",
+      "destination": "/posts/2024/04/complete-guide-to-chatgpt-practical-start-and-security-strategies/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/complete-guide-to-chatgpt-practical-start-and-security-strategies/",
+      "destination": "/posts/2024/04/complete-guide-to-chatgpt-practical-start-and-security-strategies/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/chatgpt-access-without-login-guide-reduce-immersive-translation-costs",
+      "destination": "/posts/2024/04/chatgpt-access-without-login-guide-reduce-immersive-translation-costs/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/chatgpt-access-without-login-guide-reduce-immersive-translation-costs/",
+      "destination": "/posts/2024/04/chatgpt-access-without-login-guide-reduce-immersive-translation-costs/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/guide-deploy-rsshub-vps-port-conflict-ssl-solution",
+      "destination": "/posts/2024/04/guide-deploy-rsshub-vps-port-conflict-ssl-solution/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/guide-deploy-rsshub-vps-port-conflict-ssl-solution/",
+      "destination": "/posts/2024/04/guide-deploy-rsshub-vps-port-conflict-ssl-solution/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/optimize-google-analytics-with-cloudflare-zaraz",
+      "destination": "/posts/2024/04/optimize-google-analytics-with-cloudflare-zaraz/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/optimize-google-analytics-with-cloudflare-zaraz/",
+      "destination": "/posts/2024/04/optimize-google-analytics-with-cloudflare-zaraz/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/telegram-automation-image-hosting-guide-cloudflare-integration",
+      "destination": "/posts/2024/04/telegram-automation-image-hosting-guide-cloudflare-integration/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/telegram-automation-image-hosting-guide-cloudflare-integration/",
+      "destination": "/posts/2024/04/telegram-automation-image-hosting-guide-cloudflare-integration/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/supabase-umami-vercel-privacy-analytics-free-alternative-google-analytics",
+      "destination": "/posts/2024/04/supabase-umami-vercel-privacy-analytics-free-alternative-google-analytics/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/supabase-umami-vercel-privacy-analytics-free-alternative-google-analytics/",
+      "destination": "/posts/2024/04/supabase-umami-vercel-privacy-analytics-free-alternative-google-analytics/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/comprehensive-comparison-dns-encryption-protocols-doh-dot-doq",
+      "destination": "/posts/2024/04/comprehensive-comparison-dns-encryption-protocols-doh-dot-doq/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/comprehensive-comparison-dns-encryption-protocols-doh-dot-doq/",
+      "destination": "/posts/2024/04/comprehensive-comparison-dns-encryption-protocols-doh-dot-doq/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/telegram-as-cloud-storage-tg-filestreambot-deployment-and-troubleshooting-guide",
+      "destination": "/posts/2024/04/telegram-as-cloud-storage-tg-filestreambot-deployment-and-troubleshooting-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/telegram-as-cloud-storage-tg-filestreambot-deployment-and-troubleshooting-guide/",
+      "destination": "/posts/2024/04/telegram-as-cloud-storage-tg-filestreambot-deployment-and-troubleshooting-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/enhance-user-experience-with-ai-powered-microsoft-clarity-session-recording-heatmap-analysis",
+      "destination": "/posts/2024/05/enhance-user-experience-with-ai-powered-microsoft-clarity-session-recording-heatmap-analysis/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/enhance-user-experience-with-ai-powered-microsoft-clarity-session-recording-heatmap-analysis/",
+      "destination": "/posts/2024/05/enhance-user-experience-with-ai-powered-microsoft-clarity-session-recording-heatmap-analysis/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/advancements-gpt-4o-emotional-cognition",
+      "destination": "/posts/2024/05/advancements-gpt-4o-emotional-cognition/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/advancements-gpt-4o-emotional-cognition/",
+      "destination": "/posts/2024/05/advancements-gpt-4o-emotional-cognition/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/sidestore-install-guide-ios-ipados-sideload-apps",
+      "destination": "/posts/2024/05/sidestore-install-guide-ios-ipados-sideload-apps/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/sidestore-install-guide-ios-ipados-sideload-apps/",
+      "destination": "/posts/2024/05/sidestore-install-guide-ios-ipados-sideload-apps/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/get-early-access-to-chatgpt-mac-app",
+      "destination": "/posts/2024/05/get-early-access-to-chatgpt-mac-app/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/get-early-access-to-chatgpt-mac-app/",
+      "destination": "/posts/2024/05/get-early-access-to-chatgpt-mac-app/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/trojan-service-on-cloudflare-workers",
+      "destination": "/posts/2024/05/trojan-service-on-cloudflare-workers/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/trojan-service-on-cloudflare-workers/",
+      "destination": "/posts/2024/05/trojan-service-on-cloudflare-workers/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/spring-festival-nostalgia-modern-pressures",
+      "destination": "/posts/2024/02/spring-festival-nostalgia-modern-pressures/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/spring-festival-nostalgia-modern-pressures/",
+      "destination": "/posts/2024/02/spring-festival-nostalgia-modern-pressures/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/telegram-bot-lightweight-image-hosting-service",
+      "destination": "/posts/2024/11/telegram-bot-lightweight-image-hosting-service/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/telegram-bot-lightweight-image-hosting-service/",
+      "destination": "/posts/2024/11/telegram-bot-lightweight-image-hosting-service/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/lightweight-google-analytics-cloudflare-workers-adblock-solution",
+      "destination": "/posts/2024/11/lightweight-google-analytics-cloudflare-workers-adblock-solution/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/lightweight-google-analytics-cloudflare-workers-adblock-solution/",
+      "destination": "/posts/2024/11/lightweight-google-analytics-cloudflare-workers-adblock-solution/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/building-ai-summary-service-with-cloudflare-workers",
+      "destination": "/posts/2024/11/building-ai-summary-service-with-cloudflare-workers/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/building-ai-summary-service-with-cloudflare-workers/",
+      "destination": "/posts/2024/11/building-ai-summary-service-with-cloudflare-workers/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/cloudflare-workers-telegram-multi-source-image-hosting",
+      "destination": "/posts/2024/11/cloudflare-workers-telegram-multi-source-image-hosting/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/cloudflare-workers-telegram-multi-source-image-hosting/",
+      "destination": "/posts/2024/11/cloudflare-workers-telegram-multi-source-image-hosting/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/convert-webpages-to-rss-using-follow-transform",
+      "destination": "/posts/2024/10/convert-webpages-to-rss-using-follow-transform/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/convert-webpages-to-rss-using-follow-transform/",
+      "destination": "/posts/2024/10/convert-webpages-to-rss-using-follow-transform/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/bank-cards-processed-without-consent",
+      "destination": "/posts/2024/07/bank-cards-processed-without-consent/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/bank-cards-processed-without-consent/",
+      "destination": "/posts/2024/07/bank-cards-processed-without-consent/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/asspp-sideload-app-store-multiple-region-accounts",
+      "destination": "/posts/2024/07/asspp-sideload-app-store-multiple-region-accounts/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/asspp-sideload-app-store-multiple-region-accounts/",
+      "destination": "/posts/2024/07/asspp-sideload-app-store-multiple-region-accounts/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/scarlet-enterprise-certificate-sideloading-experience",
+      "destination": "/posts/2024/07/scarlet-enterprise-certificate-sideloading-experience/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/scarlet-enterprise-certificate-sideloading-experience/",
+      "destination": "/posts/2024/07/scarlet-enterprise-certificate-sideloading-experience/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/hysteria-port-hopping-solution-for-udp-qos-limitation-by-isps",
+      "destination": "/posts/2024/09/hysteria-port-hopping-solution-for-udp-qos-limitation-by-isps/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/hysteria-port-hopping-solution-for-udp-qos-limitation-by-isps/",
+      "destination": "/posts/2024/09/hysteria-port-hopping-solution-for-udp-qos-limitation-by-isps/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/follow-app-rss-content-aggregation-new-approach-watching-the-winds-direction",
+      "destination": "/posts/2024/09/follow-app-rss-content-aggregation-new-approach-watching-the-winds-direction/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/follow-app-rss-content-aggregation-new-approach-watching-the-winds-direction/",
+      "destination": "/posts/2024/09/follow-app-rss-content-aggregation-new-approach-watching-the-winds-direction/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/three-wechat-app-on-iphone",
+      "destination": "/posts/2024/09/three-wechat-app-on-iphone/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/three-wechat-app-on-iphone/",
+      "destination": "/posts/2024/09/three-wechat-app-on-iphone/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/in-depth-review-niucun-smart-milk-preparation-machine",
+      "destination": "/posts/2024/08/in-depth-review-niucun-smart-milk-preparation-machine/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/in-depth-review-niucun-smart-milk-preparation-machine/",
+      "destination": "/posts/2024/08/in-depth-review-niucun-smart-milk-preparation-machine/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/quietly-experience-hong-kong-sim-card",
+      "destination": "/posts/2024/08/quietly-experience-hong-kong-sim-card/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/quietly-experience-hong-kong-sim-card/",
+      "destination": "/posts/2024/08/quietly-experience-hong-kong-sim-card/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/understanding-yourself-from-TAS2R38-bitter-gene",
+      "destination": "/posts/2024/06/understanding-yourself-from-TAS2R38-bitter-gene/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/understanding-yourself-from-TAS2R38-bitter-gene/",
+      "destination": "/posts/2024/06/understanding-yourself-from-TAS2R38-bitter-gene/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/trojan-services-on-cloudflare-workers",
+      "destination": "/posts/2024/06/trojan-services-on-cloudflare-workers/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/trojan-services-on-cloudflare-workers/",
+      "destination": "/posts/2024/06/trojan-services-on-cloudflare-workers/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/keka-mac-ios-file-archiver",
+      "destination": "/posts/2024/06/keka-mac-ios-file-archiver/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/keka-mac-ios-file-archiver/",
+      "destination": "/posts/2024/06/keka-mac-ios-file-archiver/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/ai-customer-service-true-empathy-must-be-based-on-science-and-rationality",
+      "destination": "/posts/2024/06/ai-customer-service-true-empathy-must-be-based-on-science-and-rationality/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/ai-customer-service-true-empathy-must-be-based-on-science-and-rationality/",
+      "destination": "/posts/2024/06/ai-customer-service-true-empathy-must-be-based-on-science-and-rationality/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/surviving-under-digital-tyranny-alibaba-tencent-threats",
+      "destination": "/posts/2024/06/surviving-under-digital-tyranny-alibaba-tencent-threats/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/surviving-under-digital-tyranny-alibaba-tencent-threats/",
+      "destination": "/posts/2024/06/surviving-under-digital-tyranny-alibaba-tencent-threats/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/tools-and-protocols-for-internet-censorship-circumvention",
+      "destination": "/posts/2024/12/tools-and-protocols-for-internet-censorship-circumvention/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/tools-and-protocols-for-internet-censorship-circumvention/",
+      "destination": "/posts/2024/12/tools-and-protocols-for-internet-censorship-circumvention/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/economic-transition-employment-pressure-2025",
+      "destination": "/posts/2024/12/economic-transition-employment-pressure-2025/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/economic-transition-employment-pressure-2025/",
+      "destination": "/posts/2024/12/economic-transition-employment-pressure-2025/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/follow-app-three-rss-sources-setup",
+      "destination": "/posts/2024/12/follow-app-three-rss-sources-setup/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/follow-app-three-rss-sources-setup/",
+      "destination": "/posts/2024/12/follow-app-three-rss-sources-setup/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/peng-fu-economic-insights-hsbc-2024",
+      "destination": "/posts/2024/12/peng-fu-economic-insights-hsbc-2024/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/peng-fu-economic-insights-hsbc-2024/",
+      "destination": "/posts/2024/12/peng-fu-economic-insights-hsbc-2024/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/surge-subscription-nodes-cloudflare-workers-regexp-filter",
+      "destination": "/posts/2023/08/surge-subscription-nodes-cloudflare-workers-regexp-filter/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/surge-subscription-nodes-cloudflare-workers-regexp-filter/",
+      "destination": "/posts/2023/08/surge-subscription-nodes-cloudflare-workers-regexp-filter/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/chu-shi-jian-biography-the-art-of-patience",
+      "destination": "/posts/2023/12/chu-shi-jian-biography-the-art-of-patience/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/chu-shi-jian-biography-the-art-of-patience/",
+      "destination": "/posts/2023/12/chu-shi-jian-biography-the-art-of-patience/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/hexo-blog-github-host-netlify-cdn",
+      "destination": "/posts/2020/04/hexo-blog-github-host-netlify-cdn/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/hexo-blog-github-host-netlify-cdn/",
+      "destination": "/posts/2020/04/hexo-blog-github-host-netlify-cdn/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/ios-delete-certificate",
+      "destination": "/posts/2020/04/ios-delete-certificate/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/ios-delete-certificate/",
+      "destination": "/posts/2020/04/ios-delete-certificate/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/netlify-cms",
+      "destination": "/posts/2020/04/netlify-cms/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/netlify-cms/",
+      "destination": "/posts/2020/04/netlify-cms/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/encrypted-DNS-resolution-request",
+      "destination": "/posts/2020/05/encrypted-DNS-resolution-request/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/encrypted-DNS-resolution-request/",
+      "destination": "/posts/2020/05/encrypted-DNS-resolution-request/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/setting-mysql-password-on-Ubuntu",
+      "destination": "/posts/2020/09/setting-mysql-password-on-Ubuntu",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/setting-mysql-password-on-Ubuntu/",
+      "destination": "/posts/2020/09/setting-mysql-password-on-Ubuntu/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/setting-V2ray-on-Ubuntu",
+      "destination": "/posts/2020/09/setting-V2ray-on-Ubuntu/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/setting-V2ray-on-Ubuntu/",
+      "destination": "/posts/2020/09/setting-V2ray-on-Ubuntu/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/windows-database-backup-ftp-script",
+      "destination": "/posts/2020/06/windows-database-backup-ftp-script/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/windows-database-backup-ftp-script/",
+      "destination": "/posts/2020/06/windows-database-backup-ftp-script/",
+      "statusCode": 301
+    },
+    {
+      "source": "/posts/:year(\\d{4})/:month(\\d{2})/:slug",
+      "destination": "/posts/:year/:month/:slug/",
+      "permanent": true
+    }
+  ]
+}

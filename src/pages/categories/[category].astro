@@ -1,7 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro'
 import PageLayout from '@/layouts/PageLayout.astro'
-import { getAllCategories, getOldestPosts, slugify } from '@/utils/content'
+import { getAllCategories, getPostsNewestFirst, slugify } from '@/utils/content'
 import Highlight from '@/components/Highlight.astro'
 import Timeline from '@/components/Timeline.astro'
 
@@ -28,7 +28,7 @@ interface Props {
 
 const { category } = Astro.props
 
-const oldestPosts = await getOldestPosts().then((posts) => {
+const newestPosts = await getPostsNewestFirst().then((posts) => {
   return posts.filter((post) => post.data.category && slugify(post.data.category) === category.slug)
 })
 ---
@@ -39,8 +39,8 @@ const oldestPosts = await getOldestPosts().then((posts) => {
       <h1 class="text-4xl font-bold">
         分类：<Highlight>{category.name}</Highlight>
       </h1>
-      <p>共有 {category.count} 篇文章。</p>
+      <p>存档 {category.count} 篇文章。</p>
     </header>
-    <Timeline posts={oldestPosts} />
+    <Timeline posts={newestPosts} />
   </div>
 </PageLayout>

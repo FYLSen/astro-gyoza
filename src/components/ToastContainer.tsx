@@ -9,7 +9,7 @@ export function ToastContainer() {
       autoClose={3000}
       hideProgressBar
       closeButton={CloseButton}
-      toastClassName="!bg-primary !text-primary text-sm border border-primary"
+      toastClassName="!bg-white dark:bg-neutral-900 !text-neutral-900 dark:text-neutral-100 text-sm border border-neutral-200 dark:border-neutral-700"
     />
   )
 }

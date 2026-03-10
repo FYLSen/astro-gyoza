@@ -1,27 +1,3 @@
-// 获取两个日期的相对时间
-export function getRelativeTime(startDate: Date, endDate = new Date()) {
-  const diffSeconds = Math.floor((endDate.getTime() - startDate.getTime()) / 1000)
-  if (diffSeconds < 0) {
-    return null
-  }
-  const diffMinutes = Math.floor(diffSeconds / 60)
-  if (diffMinutes < 10) {
-    return '刚刚'
-  }
-  if (diffMinutes < 60) {
-    return `${diffMinutes} 分钟前`
-  }
-  const diffHours = Math.floor(diffMinutes / 60)
-  if (diffHours < 24) {
-    return `${diffHours} 小时前`
-  }
-  const diffDays = Math.floor(diffHours / 24)
-  if (diffDays < 10) {
-    return `${diffDays} 天前`
-  }
-  return null
-}
-
 // 获取一个格式化的日期，格式为：2024 年 1 月 1 日 星期一
 export function getFormattedDate(date: Date) {
   const year = date.getFullYear() % 100
@@ -102,58 +78,170 @@ export interface TimeDifference {
   days: number
   hours: number
   minutes: number
+  seconds: number
 }
 
 export function calculateTimeDifference(current: Date, target: Date): TimeDifference {
-  let years = current.getFullYear() - target.getFullYear()
-  let months = current.getMonth() - target.getMonth()
-  let days = current.getDate() - target.getDate()
-  let hours = current.getHours() - target.getHours()
-  let minutes = current.getMinutes() - target.getMinutes()
-
-  if (minutes < 0) {
-    hours--
-    minutes += 60
-  }
-  if (hours < 0) {
-    days--
-    hours += 24
-  }
-  if (days < 0) {
-    months--
-    const lastMonth = new Date(current.getFullYear(), current.getMonth(), 0)
-    days += lastMonth.getDate()
-  }
-  if (months < 0) {
-    years--
-    months += 12
+  // 确保 current 大于 target
+  if (current < target) {
+    ;[current, target] = [target, current]
   }
 
-  return { years, months, days, hours, minutes }
+  // 转换为 UTC 时间
+  const currentUTC = new Date(
+    Date.UTC(
+      current.getUTCFullYear(),
+      current.getUTCMonth(),
+      current.getUTCDate(),
+      current.getUTCHours(),
+      current.getUTCMinutes(),
+      current.getUTCSeconds(),
+    ),
+  )
+
+  const targetUTC = new Date(
+    Date.UTC(
+      target.getUTCFullYear(),
+      target.getUTCMonth(),
+      target.getUTCDate(),
+      target.getUTCHours(),
+      target.getUTCMinutes(),
+      target.getUTCSeconds(),
+    ),
+  )
+
+  // 计算初始年月差值
+  let years = currentUTC.getUTCFullYear() - targetUTC.getUTCFullYear()
+  let months = currentUTC.getUTCMonth() - targetUTC.getUTCMonth()
+
+  // 处理月份溢出
+  let tempYear = targetUTC.getUTCFullYear() + years
+  let tempMonth = targetUTC.getUTCMonth() + months
+
+  if (tempMonth < 0) {
+    tempYear--
+    tempMonth += 12
+  } else if (tempMonth > 11) {
+    tempYear++
+    tempMonth -= 12
+  }
+
+  const tempDate = new Date(
+    Date.UTC(
+      tempYear,
+      tempMonth,
+      targetUTC.getUTCDate(),
+      targetUTC.getUTCHours(),
+      targetUTC.getUTCMinutes(),
+      targetUTC.getUTCSeconds(),
+    ),
+  )
+
+  if (tempDate > currentUTC) {
+    if (months === 0) {
+      years--
+      months = 11
+    } else {
+      months--
+    }
+  }
+
+  const monthEndDate = new Date(
+    Date.UTC(
+      targetUTC.getUTCFullYear() + years,
+      targetUTC.getUTCMonth() + months,
+      targetUTC.getUTCDate(),
+      targetUTC.getUTCHours(),
+      targetUTC.getUTCMinutes(),
+      targetUTC.getUTCSeconds(),
+    ),
+  )
+
+  // 计算时间差
+  let timeDiff = currentUTC.getTime() - monthEndDate.getTime()
+  let days = Math.floor(timeDiff / (24 * 60 * 60 * 1000))
+  timeDiff -= days * 24 * 60 * 60 * 1000
+
+  let hours = Math.floor(timeDiff / (60 * 60 * 1000))
+  timeDiff -= hours * 60 * 60 * 1000
+
+  let minutes = Math.floor(timeDiff / (60 * 1000))
+  timeDiff -= minutes * 60 * 1000
+
+  let seconds = Math.floor(timeDiff / 1000)
+
+  minutes += Math.floor(seconds / 60)
+  seconds %= 60
+
+  hours += Math.floor(minutes / 60)
+  minutes %= 60
+
+  days += Math.floor(hours / 24)
+  hours %= 24
+
+  return { years, months, days, hours, minutes, seconds }
 }
 
-/**
- * 获取格式化的时间单位文本
- * @param diff 时间差对象
- * @returns 格式化后的文本，如："1年2月3天4小时5分钟"
- */
-export function formatTimeDifferenceText(diff: TimeDifference): string {
+interface TimeUnits {
+  year: string
+  month: string
+  day: string
+  hour: string
+  minute: string
+  second: string
+  separator: string
+}
+
+const enUnits: TimeUnits = {
+  year: ' year',
+  month: ' month',
+  day: ' day',
+  hour: ' hour',
+  minute: ' minute',
+  second: ' second',
+  separator: ' ',
+}
+
+const zhUnits: TimeUnits = {
+  year: '年',
+  month: '个月',
+  day: '天',
+  hour: '小时',
+  minute: '分钟',
+  second: '秒',
+  separator: '',
+}
+
+export function formatTimeDifference(diff: TimeDifference, lang: string = 'zh'): string {
+  const units = lang === 'zh' ? zhUnits : enUnits
   const parts: string[] = []
 
   if (diff.years > 0) {
-    parts.push(`${diff.years}年`)
-    parts.push(`${diff.months}月`)
-    parts.push(`${diff.days}天`)
-  } else if (diff.months > 0) {
-    parts.push(`${diff.months}月`)
-    parts.push(`${diff.days}天`)
-  } else if (diff.days > 0) {
-    parts.push(`${diff.days}天`)
+    const suffix = lang === 'en' && diff.years > 1 ? 's' : ''
+    parts.push(`${diff.years}${units.year}${suffix}`)
   }
-  parts.push(`${diff.hours}小时`)
-  parts.push(`${diff.minutes}分钟`)
+  if (diff.months > 0) {
+    const suffix = lang === 'en' && diff.months > 1 ? 's' : ''
+    parts.push(`${diff.months}${units.month}${suffix}`)
+  }
+  if (diff.days > 0) {
+    const suffix = lang === 'en' && diff.days > 1 ? 's' : ''
+    parts.push(`${diff.days}${units.day}${suffix}`)
+  }
+  if (diff.hours > 0) {
+    const suffix = lang === 'en' && diff.hours > 1 ? 's' : ''
+    parts.push(`${diff.hours}${units.hour}${suffix}`)
+  }
+  if (diff.minutes > 0) {
+    const suffix = lang === 'en' && diff.minutes > 1 ? 's' : ''
+    parts.push(`${diff.minutes}${units.minute}${suffix}`)
+  }
+  if (diff.seconds > 0) {
+    const suffix = lang === 'en' && diff.seconds > 1 ? 's' : ''
+    parts.push(`${diff.seconds}${units.second}${suffix}`)
+  }
 
-  return parts.join('')
+  return parts.join(units.separator)
 }
 
 /**

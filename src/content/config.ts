@@ -18,20 +18,10 @@ const postsCollection = defineCollection({
     license: z
       .object({
         name: z.string(),
-        url: z.union([z.string().url(), z.literal('')]).optional(),
+        url: z.union([z.string(), z.literal('')]).optional(),
         description: z.string(),
       })
       .optional(),
-  }),
-})
-
-const projectsCollection = defineCollection({
-  type: 'data',
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    image: z.string(),
-    link: z.string().url(),
   }),
 })
 
@@ -44,25 +34,15 @@ const specCollection = defineCollection({
   }),
 })
 
+// Use defineCollection without specifying a schema for arrays
 const photosCollection = defineCollection({
   type: 'data',
-  schema: z
-    .array(
-      z.object({
-        name: z.string(),
-        url: z.string(),
-        description: z.string().optional(),
-        tag: z.array(z.string()).default([]),
-        date: z.string(),
-      }),
-    )
-    .default([]),
 })
 
 const friendsCollection = defineCollection({
   type: 'data',
   schema: z.object({
-    title: z.string(),
+    name: z.string(),
     description: z.string(),
     avatar: z.string(),
     link: z.string().url(),
@@ -72,7 +52,7 @@ const friendsCollection = defineCollection({
 const sayingsCollection = defineCollection({
   type: 'data',
   schema: z.object({
-    sayings: z.record(
+    sayings: z.array(
       z.object({
         content: z.string(),
         author: z.string(),
@@ -86,9 +66,8 @@ const sayingsCollection = defineCollection({
 
 export const collections = {
   posts: postsCollection,
-  projects: projectsCollection,
   spec: specCollection,
-  friends: friendsCollection,
   sayings: sayingsCollection,
   photos: photosCollection,
+  friends: friendsCollection,
 }

@@ -1,0 +1,48 @@
+:root {
+  /* 基础设置 */
+  --waline-font-size: 1rem;
+
+  /* 颜色系统 - 与 docsearch 保持一致 */
+  --waline-white: var(--color-bg-primary);
+  --waline-light-grey: var(--color-text-secondary);
+  --waline-dark-grey: var(--color-text-primary);
+
+  /* 主题色 - 使用 accent 颜色 */
+  --waline-theme-color: var(--color-accent);
+  --waline-active-color: var(--color-accent);
+
+  /* 布局颜色 */
+  --waline-color: var(--color-text-primary);
+  --waline-bg-color: var(--color-bg-primary);
+  --waline-bg-color-light: var(--color-bg-secondary);
+  --waline-bg-color-hover: var(--color-bg-secondary);
+  --waline-border-color: var(--color-border-primary);
+  --waline-disable-bg-color: var(--color-bg-secondary);
+  --waline-disable-color: var(--color-text-secondary);
+  --waline-code-bg-color: var(--color-bg-secondary);
+
+  /* 特殊颜色 */
+  --waline-bq-color: var(--color-bg-secondary);
+
+  /* 头像 */
+  --waline-avatar-size: 3.25rem;
+  --waline-m-avatar-size: calc(var(--waline-avatar-size) * 9 / 13);
+
+  /* 徽章 */
+  --waline-badge-color: var(--color-accent);
+  --waline-badge-font-size: 0.775em;
+
+  /* 信息 */
+  --waline-info-bg-color: var(--color-bg-secondary);
+  --waline-info-color: var(--color-text-secondary);
+  --waline-info-font-size: 0.625em;
+
+  --waline-border: 1px solid var(--color-border-primary);
+  --waline-avatar-radius: 80%;
+}
+
+.wl-editor:focus {
+  background-color: var(--color-bg-secondary);
+  box-shadow: inset 0 0 0 2px var(--waline-theme-color);
+  outline: none;
+}

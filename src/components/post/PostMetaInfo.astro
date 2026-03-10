@@ -1,5 +1,5 @@
 ---
-import { RelativeDate } from './RelativeDate'
+import { getFormattedShortDate } from '@/utils/date'
 import { Calendar, NotepadText, AlarmClock } from 'lucide-astro'
 
 interface Props {
@@ -13,10 +13,13 @@ interface Props {
 const { date, lastMod, words, readingMinutes, class: className } = Astro.props
 ---
 
-<div class="flex flex-wrap gap-2 text-sm text-secondary" class:list={[className]}>
+<div
+  class="flex flex-wrap gap-2 text-sm text-neutral-500 dark:text-neutral-400"
+  class:list={[className]}
+>
   <div>
     <Calendar size={13} class="inline-block -translate-y-0.5" />
-    <RelativeDate date={date} client:idle />
+    <span>{getFormattedShortDate(date)}</span>
     {lastMod && <span class="text-xs">(已编辑)</span>}
   </div>
   <div>

@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
+import type { Variants } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
-const sentenceVariants = {
+const sentenceVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -12,7 +13,7 @@ const sentenceVariants = {
   },
 }
 
-const wordVariants = {
+const wordVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
@@ -33,7 +34,7 @@ export const AnimatedText = ({ first = '', last = '' }: { first: string; last: s
   return (
     <motion.div
       ref={ref}
-      className="text-xs text-center text-balance text-secondary"
+      className="text-xs text-center text-balance text-neutral-500 dark:text-neutral-400"
       initial="hidden"
       animate={inView ? 'visible' : 'hidden'}
       variants={sentenceVariants}

@@ -1,3 +1,5 @@
+import SunCalc from 'suncalc'
+
 export type MoonPhaseConfig = {
   image: string
   name: string
@@ -49,11 +51,10 @@ export const MOON_PHASES: MoonPhaseConfig[] = [
 
 export function getMoonPhase(): number {
   const date = new Date()
-  const referenceNewMoon = new Date(2024, 9, 2, 18, 49).getTime()
-  const currentDate = date.getTime()
-  const diffDays = (currentDate - referenceNewMoon) / (1000 * 60 * 60 * 24)
-  const phase = ((diffDays % 29.53059) / 29.53059) * 8
-  return Math.floor(phase + 8) % 8
+
+  const moonIllumination = SunCalc.getMoonIllumination(date)
+
+  return Math.floor(moonIllumination.phase * 8) % 8
 }
 
 export function getCurrentMoonPhase(): MoonPhaseConfig {

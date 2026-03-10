@@ -44,7 +44,7 @@ function BackToTop() {
 
   return (
     <motion.button
-      className="size-10 rounded-full shadow-lg shadow-zinc-800/5 border border-primary bg-white/50 dark:bg-zinc-800/50 backdrop-blur flex items-center justify-center text-primary hover:bg-white/80 dark:hover:bg-zinc-800/80 transition-colors"
+      className="size-10 rounded-full shadow-lg shadow-zinc-800/5 border border-neutral-200 dark:border-neutral-700 bg-white/50 dark:bg-zinc-800/50 backdrop-blur flex items-center justify-center text-neutral-900 dark:text-neutral-100 hover:bg-white/80 dark:hover:bg-zinc-800/80 transition-colors"
       type="button"
       aria-label="Back to top"
       onClick={handleBackToTop}

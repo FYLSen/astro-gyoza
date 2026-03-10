@@ -27,10 +27,20 @@ const title = await input({
 
 const content = `---
 title: ${title}
+summary: 
 date: ${new Date().toISOString()}
+lastMod: 
 tags: []
+category: 
 comments: true
 draft: false
+aisummary: true
+password: ''
+cover: ''
+license:
+  name: '版权所有 (All Rights Reserved)'
+  url: ''
+  description: 版权所有，仅供阅读。未经许可，禁止转载、复制、分发、修改或创作衍生作品。如需转载请联系站长获得授权。
 ---
 `
 

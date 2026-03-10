@@ -19,11 +19,11 @@
 }
 
 .markdown h3 {
-  @apply text-xl font-semibold mt-8 mb-3;
+  @apply text-xl font-semibold mt-8 mb-6;
 }
 
 .markdown h4 {
-  @apply font-semibold mt-6 mb-2;
+  @apply text-lg font-semibold mt-6 mb-4;
 }
 
 .markdown a {
@@ -31,11 +31,11 @@
 }
 
 .markdown a + .icon-external-link {
-  @apply text-secondary ml-1;
+  @apply text-text-secondary ml-1;
 }
 
 .markdown blockquote {
-  @apply my-5 pl-8 border-l-2 border-accent/80 text-secondary italic relative pt-6;
+  @apply my-5 pl-8 border-l-2 border-accent/80 text-text-secondary italic relative pt-6;
 }
 
 .markdown blockquote::before {
@@ -51,11 +51,11 @@
 }
 
 .markdown :not(pre) > code {
-  @apply px-2 py-1 rounded bg-secondary text-sm font-semibold;
+  @apply px-2 py-1 rounded bg-bg-secondary text-sm font-semibold;
 }
 
 .markdown .code-block {
-  @apply relative mt-10 mb-5 bg-secondary rounded-lg;
+  @apply relative mt-10 mb-5 bg-bg-secondary rounded-lg;
 }
 
 .markdown .lang-tag {
@@ -75,7 +75,7 @@
 }
 
 .markdown tr {
-  @apply border-b border-primary;
+  @apply border-b border-border-primary;
 }
 
 .markdown th,
@@ -88,7 +88,7 @@
 }
 
 .markdown img {
-  @apply rounded-lg bg-secondary min-h-[80px] min-w-[80px];
+  @apply rounded-lg bg-bg-secondary min-h-[80px] min-w-[80px];
 }
 
 .markdown figure {
@@ -96,7 +96,7 @@
 }
 
 .markdown figcaption {
-  @apply mt-3 text-secondary text-sm;
+  @apply mt-3 text-text-secondary text-sm;
 }
 
 .markdown .heading-anchor {
@@ -109,7 +109,7 @@
 }
 
 .markdown iframe {
-  @apply rounded-lg w-full bg-secondary;
+  @apply rounded-lg w-full bg-bg-secondary;
 }
 
 .markdown iframe.codepen {
@@ -121,7 +121,7 @@
 }
 
 .markdown hr {
-  @apply my-12 mx-auto max-w-[100px] border-primary;
+  @apply my-12 mx-auto max-w-[100px] border-border-primary;
 }
 
 .markdown ul {

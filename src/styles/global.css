@@ -1,7 +1,77 @@
+@import 'tailwindcss';
 @import './shiki.css';
 @import './markdown.css';
 @import './signature.css';
 @import './swup.css';
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --font-sans:
+    'Noto Sans SC', 'Source Han Sans SC', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Source Han Serif', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+  --font-cursive: 'YunfengHanchen', 'ZhiMangXing';
+
+  /* 亮色模式 (Light Mode) 基础配置 - 提升文字对比度与降低背景刺眼度 (Zinc + 深海蓝) */
+  --color-accent: #0d9488;
+  /* text-teal-600: 更深的蓝色保证白色背景下的可读性 */
+  --color-bg-root: #fafafa;
+  /* bg-neutral-50: 极浅灰，避免纯白刺眼 */
+  --color-bg-primary: #ffffff;
+  /* 卡片纯白 */
+  --color-bg-secondary: #f4f4f5;
+  /* bg-zinc-100: 温和的浅灰 */
+  --color-text-primary: #18181b;
+  /* text-zinc-900: 深色字体，不刺眼 */
+  --color-text-secondary: #52525b;
+  /* text-zinc-600 */
+  --color-border-primary: #e4e4e7;
+  /* border-zinc-200 */
+
+  /* 暗色模式 (Dark Mode) - 利用 Tailwind v4 支持内联 fallback 的方式 */
+  /* 由于我们在全局定义变量，暗色模式的实际切换将通过修改 :root 变量或依托于 .dark 选择器 */
+
+  --color-scrollbar-light: #cbd5e1;
+  --color-scrollbar-dark: #475569;
+
+  --animate-hue: hue 8s linear infinite;
+  --animate-blink: blink 1s step-end infinite;
+
+  @keyframes hue {
+    from {
+      filter: hue-rotate(0deg);
+    }
+
+    to {
+      filter: hue-rotate(-360deg);
+    }
+  }
+
+  @keyframes blink {
+    from,
+    to {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0;
+    }
+  }
+}
+
+@utility min-h-main {
+  min-height: calc(100vh - 200px);
+}
+
+@utility transition-bg-color {
+  transition-property: background-color;
+}
+
+@utility z-1 {
+  z-index: 1;
+}
 
 @font-face {
   font-family: 'Atkinson';
@@ -19,35 +89,102 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'ZhiMangXing';
+  src: url('/fonts/ZhiMangXing-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'YunfengHanchen';
+  src: url('/fonts/YunfengHanchenFont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.search-highlight,
+.search-result-item mark {
+  @apply font-medium text-amber-500;
+  background: transparent;
+  background: linear-gradient(transparent 60%, rgba(254, 243, 199, 0.7) 40%);
+  transition:
+    color 0.3s,
+    background 0.3s;
+}
+
+.dark .search-highlight,
+.dark .search-result-item mark,
+[data-theme='dark'] .search-highlight,
+[data-theme='dark'] .search-result-item mark {
+  @apply text-amber-400;
+  background: linear-gradient(transparent 60%, rgba(120, 53, 15, 0.3) 40%);
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
 
 * {
   scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .custom-scrollbar {
   scrollbar-width: thin !important;
   -ms-overflow-style: auto !important;
-  &::-webkit-scrollbar {
-    display: block !important;
-  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  display: block !important;
+  width: 8px !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-gray-300/50 hover:bg-gray-400/50 rounded-full transition-colors duration-200;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-gray-600/50 hover:bg-gray-500/50;
 }
 
 ::selection {
-  background-color: theme('colors.accent');
+  background-color: var(--color-accent);
   color: white;
 }
 
 [data-theme='dark'] ::selection {
-  background-color: theme('colors.accent/0.3');
+  background-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
 }
 
 html {
-  color: theme('textColor.primary');
-  background-color: theme('backgroundColor.root');
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-root);
   scroll-padding-top: 64px;
+}
+
+/* 覆盖深色模式的 Native CSS 变量 - 使用纯正 Zinc 避免泛蓝，同时压暗整体亮度 */
+html[data-theme='dark'] {
+  --color-accent: #2dd4bf;
+  /* text-teal-400: 暗色模式下保持适中亮度 */
+  --color-bg-root: #09090b;
+  /* bg-zinc-950: 沉稳深邃且不发蓝的深色底 */
+  --color-bg-primary: #18181b;
+  /* bg-zinc-900: 卡片底色 */
+  --color-bg-secondary: #27272a;
+  /* bg-zinc-800: 交互或次要区域 */
+  --color-text-primary: #f4f4f5;
+  /* text-zinc-100: 柔和发白 */
+  --color-text-secondary: #a1a1aa;
+  /* text-zinc-400 */
+  --color-border-primary: #3f3f46;
+  /* border-zinc-700 */
 }
 
 html.gray {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { calculateTimeDifference, formatTimeDifferenceText, getTimeUnits } from '@/utils/date'
+import { calculateTimeDifference, formatTimeDifference, getTimeUnits } from '@/utils/date'
 
 interface TimeRewindAnimationProps {
   targetDate: string | Date
@@ -99,7 +99,7 @@ export const TimeRewindAnimation: React.FC<TimeRewindAnimationProps> = ({
   const timeUnits = getTimeUnits(currentTime)
   const target = targetDate instanceof Date ? targetDate : new Date(targetDate)
   const timeDifference = calculateTimeDifference(new Date(), target)
-  const timeDifferevceText = `这是${formatTimeDifferenceText(timeDifference)}前的故事。`
+  const timeDifferevceText = `这是${formatTimeDifference(timeDifference)}前的故事。`
 
   return (
     <div ref={componentRef} className={`grid grid-rows-[auto,1fr] gap-1 font-mono ${className}`}>

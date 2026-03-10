@@ -43,7 +43,7 @@ export function PostCardHoverOverlay() {
       <AnimatePresence>
         {enter && (
           <motion.div
-            className="absolute inset-y-4 -inset-x-4 -z-1 bg-accent/10 rounded-lg"
+            className="absolute inset-y-4 -inset-x-4 -z-1 bg-teal-600/10 dark:bg-teal-400/10 rounded-lg"
             initial={{ opacity: 0.2, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}

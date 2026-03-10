@@ -8,6 +8,7 @@ export function WebAnalytics() {
       {analytics.umami.websiteId && <UmamiAnalytics {...analytics.umami} />}
       {analytics.google.measurementId && <GoogleAnalytics {...analytics.google} />}
       {analytics.microsoftClarity.projectId && <MicrosoftClarity {...analytics.microsoftClarity} />}
+      {analytics.cloudflare.token && <CloudflareAnalytics {...analytics.cloudflare} />}
     </>
   )
 }
@@ -20,28 +21,9 @@ function UmamiAnalytics({ serverUrl, websiteId }: { serverUrl?: string; websiteI
 
 function GoogleAnalytics({
   measurementId,
-  config: { fallback, endpoint } = {},
 }: {
   measurementId: string
-  config?: { fallback?: boolean; endpoint?: string }
 }) {
-  if (endpoint) {
-    return (
-      <>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.minimalAnalytics = {
-trackingId: '${measurementId}',
-analyticsEndpoint: '${endpoint}',
-defineGlobal: false,
-autoTrack: true,};`,
-          }}
-        ></script>
-        <script src={`${endpoint}?fallback=${fallback}`} async></script>
-      </>
-    )
-  }
-
   return (
     <>
       <script async src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}></script>
@@ -71,6 +53,16 @@ function MicrosoftClarity({ projectId }: { projectId: string }) {
         }}
       ></script>
     </>
+  )
+}
+
+function CloudflareAnalytics({ token }: { token: string }) {
+  return (
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon={JSON.stringify({ token })}
+    />
   )
 }
 

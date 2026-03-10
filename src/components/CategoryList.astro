@@ -18,8 +18,8 @@ const { categories } = Astro.props
   ) : (
     <div class="space-y-2.5">
       {categories.map((category) => (
-        <a class="relative block group" href={`/categories/${category.slug}`}>
-          <div class="absolute -z-1 inset-0 rounded-lg bg-accent/10 group-hover:transition group-hover:bg-accent/20 group-hover:scale-105" />
+        <a class="relative block group" href={`/categories/${category.slug}/`}>
+          <div class="absolute -z-1 inset-0 rounded-lg bg-teal-600/10 dark:bg-teal-400/10 group-hover:transition group-hover:bg-teal-600/20 dark:bg-teal-400/20 group-hover:scale-105" />
           <div class="px-2.5 py-2 text-sm flex gap-1 select-none items-center">
             <FolderOpen size={14} class="inline-block" />
             <span class="grow">{category.name}</span>

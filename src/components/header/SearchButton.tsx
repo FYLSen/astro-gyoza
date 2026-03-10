@@ -1,209 +1,214 @@
-import { motion, useAnimation } from 'framer-motion'
-import { useCurrentModal, useModal } from '@/components/ui/modal'
-import { useEffect, useState } from 'react'
-import { useDebounceValue } from '@/hooks/useDebounceValue'
-import { Search } from 'lucide-react'
-
-let pagefind: any = null
-async function loadPagefind() {
-  if (import.meta.env.PROD && !pagefind) {
-    const url = '/pagefind/pagefind.js'
-    pagefind = await import(/* @vite-ignore */ url)
-  }
-}
+import { motion, useAnimation, AnimatePresence } from 'framer-motion'
+import { useState, useRef, useEffect } from 'react'
+import { Search, X } from 'lucide-react'
 
 export function SearchButton() {
-  const { present } = useModal()
-  const controls = useAnimation()
+    const [isExpanded, setIsExpanded] = useState(false)
+    const [searchQuery, setSearchQuery] = useState('')
+    const controls = useAnimation()
+    const searchButtonRef = useRef<HTMLButtonElement>(null)
+    const searchInputRef = useRef<HTMLInputElement>(null)
+    const searchFormRef = useRef<HTMLFormElement>(null)
+    const [isMobile, setIsMobile] = useState(false)
 
-  const openModal = () => {
-    present({
-      content: <SearchPanel />,
-    })
-  }
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsMobile(window.innerWidth <= 768)
+        }
 
-  useSearchKeyboardEvents({ onOpen: openModal })
+        // 初始检查
+        checkScreenSize()
 
-  return (
-    <button
-      className="size-9 rounded-full shadow-lg shadow-zinc-800/5 border border-primary bg-white/50 dark:bg-zinc-800/50 backdrop-blur flex items-center justify-center text-primary hover:bg-white/80 dark:hover:bg-zinc-800/80 transition-colors overflow-hidden"
-      type="button"
-      aria-label="Search"
-      onClick={openModal}
-      onMouseEnter={() => controls.start('animate')}
-      onMouseLeave={() => controls.start('normal')}
-    >
-      <motion.div
-        variants={{
-          normal: { x: 0, y: 0 },
-          animate: {
-            x: [0, 0, -3, 0],
-            y: [0, -4, 0, 0],
-          },
-        }}
-        transition={{
-          duration: 1,
-          bounce: 0.3,
-        }}
-        animate={controls}
-      >
-        <Search size={20} />
-      </motion.div>
-    </button>
-  )
-}
+        // 监听窗口大小变化
+        window.addEventListener('resize', checkScreenSize)
 
-function SearchPanel() {
-  const [keyword, setKeyword] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [results, setResults] = useState<any[]>([])
-  const debouncedKeyword = useDebounceValue(keyword, 350)
+        return () => {
+            window.removeEventListener('resize', checkScreenSize)
+        }
+    }, [])
 
-  const { dismiss } = useCurrentModal()
-
-  async function search(value: string) {
-    if (!value) {
-      setResults([])
-      return
+    const toggleSearch = () => {
+        if (!isExpanded) {
+            setSearchQuery('')
+        }
+        setIsExpanded(!isExpanded)
     }
-    setIsLoading(true)
-    await loadPagefind()
-    if (pagefind) {
-      const res = await pagefind.search(value)
-      const nextResults = await Promise.all(res.results.map((r: any) => r.data()))
-      setResults(nextResults)
+
+    const handleSearch = (e: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
+        e.preventDefault()
+        if (searchQuery.trim()) {
+            const tempLink = document.createElement('a')
+            tempLink.href = `/search?q=${encodeURIComponent(searchQuery.trim())}`
+            tempLink.style.display = 'none'
+            document.body.appendChild(tempLink)
+            tempLink.click()
+            setTimeout(() => {
+                document.body.removeChild(tempLink)
+            }, 100)
+            setIsExpanded(false)
+        }
     }
-    setIsLoading(false)
-  }
 
-  useEffect(() => {
-    search(debouncedKeyword)
-  }, [debouncedKeyword])
+    // 当搜索框展开时，自动聚焦搜索输入框
+    useEffect(() => {
+        if (isExpanded && searchInputRef.current) {
+            setTimeout(() => {
+                searchInputRef.current?.focus()
+            }, 300)
+        }
+    }, [isExpanded])
 
-  let resultList = null
-  if (import.meta.env.DEV) {
-    resultList = (
-      <div className="h-full flex items-center justify-center">
-        <div className="flex gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="2em" viewBox="0 0 24 24">
-            <path
-              fill="currentColor"
-              d="M4 20v-6a8 8 0 1 1 16 0v6h1v2H3v-2zm2 0h12v-6a6 6 0 0 0-12 0zm5-18h2v3h-2zm8.778 2.808l1.414 1.414l-2.12 2.121l-1.415-1.414zM2.808 6.222l1.414-1.414l2.121 2.12L4.93 8.344zM7 14a5 5 0 0 1 5-5v2a3 3 0 0 0-3 3z"
-            />
-          </svg>
-          <div>
-            <div className="font-semibold mb-1">抱歉</div>
-            <div className="text-sm">该功能基于 pagefind，请在构建后再次尝试。</div>
-          </div>
-        </div>
-      </div>
-    )
-  } else if (isLoading) {
-    resultList = (
-      <div className="h-full flex items-center justify-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="2em"
-          viewBox="0 0 24 24"
-          className="animate-spin"
-        >
-          <path
-            fill="currentColor"
-            d="M12 2a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1m0 15a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0v-3a1 1 0 0 1 1-1m8.66-10a1 1 0 0 1-.366 1.366l-2.598 1.5a1 1 0 1 1-1-1.732l2.598-1.5A1 1 0 0 1 20.66 7M7.67 14.5a1 1 0 0 1-.367 1.366l-2.598 1.5a1 1 0 1 1-1-1.732l2.598-1.5a1 1 0 0 1 1.366.366M20.66 17a1 1 0 0 1-1.366.366l-2.598-1.5a1 1 0 0 1 1-1.732l2.598 1.5A1 1 0 0 1 20.66 17M7.67 9.5a1 1 0 0 1-1.367.366l-2.598-1.5a1 1 0 1 1 1-1.732l2.598 1.5A1 1 0 0 1 7.67 9.5"
-          />
-        </svg>
-      </div>
-    )
-  } else if (keyword.length === 0) {
-    resultList = (
-      <div className="h-full flex items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="2em" viewBox="0 0 24 24">
-          <path
-            fill="currentColor"
-            d="m18.031 16.617l4.283 4.282l-1.415 1.415l-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9s9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617m-2.006-.742A6.98 6.98 0 0 0 18 11c0-3.867-3.133-7-7-7s-7 3.133-7 7s3.133 7 7 7a6.98 6.98 0 0 0 4.875-1.975z"
-          />
-        </svg>
-      </div>
-    )
-  } else if (results.length === 0) {
-    resultList = (
-      <div className="h-full flex items-center justify-center">
-        <div className="flex flex-col items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="2em" viewBox="0 0 24 24">
-            <path
-              fill="currentColor"
-              d="M11 11v2l-5.327 6H11v2H3v-2l5.326-6H3v-2zm10-8v2l-5.327 6H21v2h-8v-2l5.326-6H13V3z"
-            />
-          </svg>
-          <div>无内容</div>
-        </div>
-      </div>
-    )
-  } else {
-    resultList = (
-      <>
-        <div className="text-sm px-3 mb-2">找到以下 {results.length} 条结果</div>
-        {results.map((item) => {
-          return (
-            <a
-              href={item.url}
-              key={item.url}
-              className="hover:bg-accent/10 rounded block px-3 py-2"
-              onClick={dismiss}
+    // 处理ESC键关闭搜索框
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && isExpanded) {
+                setIsExpanded(false)
+            }
+        }
+
+        document.addEventListener('keydown', handleKeyDown)
+        return () => document.removeEventListener('keydown', handleKeyDown)
+    }, [isExpanded])
+
+    // 点击外部区域关闭搜索框
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (
+                isExpanded &&
+                searchFormRef.current &&
+                searchButtonRef.current &&
+                !searchFormRef.current.contains(e.target as Node) &&
+                !searchButtonRef.current.contains(e.target as Node)
+            ) {
+                setIsExpanded(false)
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [isExpanded])
+
+    return (
+        <div className="flex items-center justify-center h-full w-full">
+            <AnimatePresence>
+                {isExpanded && (
+                    <motion.form
+                        ref={searchFormRef}
+                        className="absolute h-9 z-20 overflow-hidden rounded-[18px] right-11 w-[calc(100vw-120px)] md:w-auto"
+                        initial={{ width: 0, opacity: 0, scale: 0.5 }}
+                        animate={{
+                            width: isMobile ? 'calc(100vw - 120px)' : 240,
+                            opacity: 1,
+                            scale: 1,
+                        }}
+                        exit={{ width: 0, opacity: 0, scale: 0.5 }}
+                        transition={{
+                            duration: 0.3,
+                            ease: 'easeInOut',
+                            opacity: { duration: 0.2 },
+                        }}
+                        onSubmit={handleSearch}
+                        style={{
+                            backgroundColor: isMobile ? 'rgba(var(--color-bg-primary),0.95)' : 'transparent',
+                            backdropFilter: isMobile ? 'blur(8px)' : 'none',
+                        }}
+                    >
+                        <div className="relative w-full h-full flex">
+                            <input
+                                ref={searchInputRef}
+                                type="text"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                placeholder="搜索..."
+                                className="w-full h-full py-2 px-4 pr-10 rounded-[18px] 
+                md:border-0 border border-neutral-200 dark:border-neutral-700 
+                bg-transparent text-neutral-900 dark:text-neutral-100 text-sm outline-none transition-all duration-200 
+                
+                md:bg-gradient-to-b md:from-white/95 md:to-zinc-100/95 
+                md:dark:from-zinc-800 md:dark:to-zinc-900
+                
+                md:shadow-[inset_0_1px_3px_rgba(0,0,0,0.2)] 
+                dark:md:shadow-[inset_0_1px_3px_rgba(0,0,0,0.4)]
+                
+                shadow-sm dark:border-neutral-200 dark:border-neutral-700 
+                focus:border-teal-600 dark:border-teal-400 
+                md:focus:shadow-[inset_0_1px_3px_rgba(0,0,0,0.2),0_0_0_2px_rgba(var(--color-accent),0.3)] 
+                focus:shadow-[0_0_0_2px_rgba(var(--color-accent),0.2)]
+                
+                md:backdrop-blur-md"
+                            />
+                            <div className="absolute right-0 inset-y-0 pr-2 flex items-center">
+                                <button
+                                    type="submit"
+                                    className="flex items-center justify-center bg-transparent border-none text-neutral-500 dark:text-neutral-400 p-1 rounded-full transition-all duration-200 hover:text-teal-600 dark:text-teal-400 hover:bg-teal-600/10 dark:hover:bg-teal-400/10 cursor-pointer"
+                                    aria-label="Searching"
+                                >
+                                    <Search size={16} className="flex-shrink-0" />
+                                </button>
+                            </div>
+                        </div>
+                    </motion.form>
+                )}
+            </AnimatePresence>
+
+            <motion.button
+                ref={searchButtonRef}
+                className="w-9 h-9 rounded-full flex items-center justify-center text-teal-600 dark:text-teal-400 transition-all duration-200 overflow-hidden z-30 cursor-pointer
+        bg-gradient-to-b from-white/95 to-zinc-100/95 dark:from-zinc-800 dark:to-zinc-900
+        shadow-lg shadow-zinc-800/10 ring-1 ring-zinc-900/10 dark:ring-zinc-100/20
+        hover:shadow-md hover:ring-zinc-900/20 dark:hover:ring-zinc-100/30"
+                animate={{
+                    width: isExpanded ? '20px' : '36px',
+                    height: isExpanded ? '20px' : '36px',
+                    scale: isExpanded ? 0.8 : 1,
+                }}
+                transition={{
+                    duration: 0.3,
+                    scale: { type: 'spring', stiffness: 300, damping: 25 },
+                }}
+                type="button"
+                aria-label={isExpanded ? 'Close' : 'Search'}
+                onClick={toggleSearch}
+                onMouseEnter={() => !isExpanded && controls.start('animate')}
+                onMouseLeave={() => !isExpanded && controls.start('normal')}
             >
-              <div className="font-semibold">{item.meta.title}</div>
-              <p className="text-sm" dangerouslySetInnerHTML={{ __html: item.excerpt }}></p>
-            </a>
-          )
-        })}
-      </>
+                <motion.div
+                    className="flex items-center justify-center w-full h-full"
+                    variants={{
+                        normal: { scale: 1 },
+                        animate: {
+                            scale: [1, 1.2, 0.9, 1],
+                        },
+                    }}
+                    transition={{
+                        duration: 0.6,
+                        ease: 'easeInOut',
+                    }}
+                    animate={controls}
+                >
+                    {isExpanded ? (
+                        <motion.div
+                            className="flex items-center justify-center w-full h-full"
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            exit={{ scale: 0 }}
+                            transition={{ duration: 0.2 }}
+                        >
+                            <X size={12} className="flex-shrink-0" />
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            className="flex items-center justify-center w-full h-full"
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            exit={{ scale: 0 }}
+                            transition={{ duration: 0.2 }}
+                        >
+                            <Search size={20} className="flex-shrink-0" />
+                        </motion.div>
+                    )}
+                </motion.div>
+            </motion.button>
+        </div>
     )
-  }
-
-  return (
-    <motion.div
-      className="bg-primary rounded-lg w-[90vw] h-[80vh] max-w-[680px] max-h-[480px] border border-primary flex flex-col"
-      initial={{ y: 20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      exit={{ y: 20, opacity: 0 }}
-    >
-      <input
-        className="px-4 py-3 outline-none bg-transparent border-b border-primary"
-        type="text"
-        placeholder="Search..."
-        maxLength={64}
-        value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}
-      />
-      <div className="px-4 py-3 overflow-y-auto grow">{resultList}</div>
-      <div className="px-3 py-2 flex justify-end">
-        <a
-          href="https://pagefind.app/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center "
-        >
-          <span className="mr-2 text-xs">Search by</span>
-          <span className="font-semibold">pagefind</span>
-        </a>
-      </div>
-    </motion.div>
-  )
-}
-
-function useSearchKeyboardEvents({ onOpen }: { onOpen: () => void }) {
-  useEffect(() => {
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key.toLowerCase() === 'k' && (event.metaKey || event.ctrlKey)) {
-        event.preventDefault()
-        onOpen()
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [onOpen])
 }

@@ -1,6 +1,6 @@
 ---
 import Layout from './Layout.astro'
-import { HeadGradient } from '@/components/head-gradient'
+import { TyndallEffect } from '@/components/ui/TyndallEffect'
 import Footer from '@/components/footer/Footer.astro'
 import { Header } from '@/components/header/Header'
 import { Provider } from '@/components/provider/Provider'
@@ -28,8 +28,8 @@ const { title, description, image, mdTitle, mdDescription, mdSlug } = Astro.prop
   />
 
   <Header client:only="react" />
-  <main class="relative z-1 pt-16 min-h-main bg-primary">
-    <HeadGradient client:idle />
+  <main class="relative z-1 pt-16 min-h-main bg-white dark:bg-neutral-900">
+    <TyndallEffect client:idle />
     <div class="swup-transition-fade">
       <slot />
     </div>

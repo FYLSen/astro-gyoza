@@ -2,10 +2,10 @@
 import Timeline from '@/components/Timeline.astro'
 import Highlight from '@/components/Highlight.astro'
 import PageLayout from '@/layouts/PageLayout.astro'
-import { getOldestPosts } from '@/utils/content'
+import { getPostsNewestFirst } from '@/utils/content'
 import { TimelineProgress } from '@/components/TimelineProgress'
 
-const oldestPosts = await getOldestPosts()
+const newestPosts = await getPostsNewestFirst()
 ---
 
 <PageLayout title="归档">
@@ -14,10 +14,10 @@ const oldestPosts = await getOldestPosts()
       <h1 class="text-4xl font-bold">
         <Highlight>归档</Highlight>
       </h1>
-      <p>共产出 {oldestPosts.length} 篇文章，再接再厉。</p>
-      <hr class="w-[100px] border-primary" />
+      <p>残留 {newestPosts.length} 篇文章，已属不易。</p>
+      <hr class="w-[100px] border-neutral-200 dark:border-neutral-700" />
       <TimelineProgress client:load />
     </header>
-    <Timeline posts={oldestPosts} />
+    <Timeline posts={newestPosts} />
   </div>
 </PageLayout>

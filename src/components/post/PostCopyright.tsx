@@ -35,7 +35,7 @@ export function PostCopyright({
   }, [lastMod])
 
   return (
-    <section className="text-xs leading-loose text-secondary">
+    <section className="text-xs leading-loose text-neutral-500 dark:text-neutral-400">
       <p>文章标题：{title}</p>
       <p>文章作者：{author.name}</p>
       <p>
@@ -45,7 +45,7 @@ export function PostCopyright({
         </CopyLink>
       </p>
       <p>最后修改时间：{lastModStr}</p>
-      <hr className="my-3 border-primary" />
+      <hr className="my-3 border-neutral-200 dark:border-neutral-700" />
       <div>
         <div className="float-right ml-4 my-2">
           <AnimatedSignature />
@@ -53,22 +53,16 @@ export function PostCopyright({
         <p>
           {currentLicense.description}
           <br />
-          {currentLicense.url ? (
-            <>
-              本文采用
-              <a
-                className="hover:underline hover:text-accent underline-offset-2"
-                href={currentLicense.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {currentLicense.name}
-              </a>
-              进行许可。
-            </>
-          ) : (
-            <>本文遵循 {currentLicense.name}。</>
-          )}
+          本文遵循&nbsp;
+          <a
+            className="hover:underline hover:text-teal-600 dark:text-teal-400 underline-offset-2"
+            href={currentLicense.url || '#'}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {currentLicense.name}
+          </a>
+          &nbsp;许可协议。
         </p>
       </div>
     </section>

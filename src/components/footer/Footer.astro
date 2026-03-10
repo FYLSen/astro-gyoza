@@ -4,7 +4,7 @@ import { author, footer } from '@/config.json'
 import { getAllPostsWordCount } from '@/utils/content'
 import { RunningDays } from './RunningDays'
 import Link from './Link.astro'
-import { Rss, Map } from 'lucide-astro'
+import { Copyright, Handshake, Rss } from 'lucide-astro'
 
 const sinceYear = new Date(footer.startTime).getFullYear()
 const thisYear = new Date().getFullYear()
@@ -12,34 +12,100 @@ const copyDate = sinceYear === thisYear ? thisYear : `${sinceYear} - ${thisYear}
 
 const wordCount = await getAllPostsWordCount()
 
-const wordCountStr = (wordCount / 1000).toFixed(1) + 'k'
+const quotes = footer.quotes
+const randomQuote = quotes[Math.floor(Math.random() * quotes.length)]
 ---
 
-<footer class="relative z-1 py-8 px-4 md:px-8 border-t border-primary text-secondary text-sm">
-  <div class="text-center space-y-2 item-center">
-    <div>
-      Powered by
-      <Link href="https://astro.build/">Astro</Link>
-      & Based on <Link href="https://github.com/lxchapu/astro-gyoza">Gyoza</Link>, modified by <Link href="https://github.com/FYLSen/astro-gyoza/tree/experiment/lucide-replacement">Cedar</Link>.
-    </div>
-    <div class="space-x-1 flex items-center justify-center gap-2">
-      <span>&copy;&nbsp;{copyDate} <Link href="/">{author.name}</Link>.</span>
-      <Link href="/rss.xml" data-no-swup>
-        <Rss size={14} class="inline-block -translate-y-0.5" />
-        RSS
-      </Link>
-      <Link href="/sitemap-index.xml" data-no-swup>
-        <Map size={14} class="inline-block -translate-y-0.5" />
-        站点地图
-      </Link>
-    </div>
-    <div>
-      <RunningDays client:only="react" />
-      <span class="select-none opacity-50">|</span>
-      <span>共嘚嘚了 {wordCountStr} 字</span>
-    </div>
-  </div>
-  <div class="mt-4 flex justify-center">
+<footer
+  class="relative z-1 pt-[40px] pb-6 px-4 md:px-6 lg:px-8 border-t border-neutral-200 dark:border-neutral-800 bg-zinc-50/80 dark:bg-zinc-950/80 backdrop-blur-sm text-sm"
+>
+  <div class="absolute lift-4 top-0 -translate-y-1/2">
     <ThemeSwitch client:only="react" />
+  </div>
+
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-[60%_40%] gap-y-5 gap-x-4 lg:gap-x-6">
+      <div
+        class="flex flex-col space-y-3 text-neutral-500/80 dark:text-neutral-400/80 items-start sm:pl-1 md:pl-4 lg:pl-12"
+      >
+        <div class="flex flex-wrap items-center gap-x-2">
+          <div class="flex items-center">
+            <Copyright size={12} className="mr-1" />
+            <span>{copyDate} <Link href="/">{author.name}</Link></span>
+          </div>
+
+          <span class="select-none text-neutral-500/30 dark:text-neutral-400/30">|</span>
+          <div class="flex items-center whitespace-nowrap">
+            <a href="/friends" class="inline-flex items-center">
+              <Handshake size={12} class="inline-block mr-1" />
+              <span class="inline-block">Blogroll</span>
+            </a>
+            <span class="select-none text-neutral-500/30 dark:text-neutral-400/30 mx-2">•</span>
+            <a href="/rss.xml" data-no-swup class="inline-flex items-center">
+              <Rss size={12} class="inline-block mr-1" />
+              <span class="inline-block">RSS</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-x-2">
+          <span
+            >Based on <Link href="https://github.com/lxchapu/astro-gyoza">Gyoza</Link>, modified by <Link
+              href="https://github.com/Gedaric/astro-gyoza/tree/experiment/lucide-replacement"
+              >Xuesong</Link
+            >.</span
+          >
+        </div>
+
+        <div class="flex flex-wrap items-center gap-x-2">
+          <div class="inline-flex items-center">
+            <RunningDays client:only="react" />
+          </div>
+
+          <span class="select-none text-neutral-500/30 dark:text-neutral-400/30">•</span>
+
+          <span>{wordCount} 字</span>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:pr-1 md:pr-8 lg:pr-12">
+        <div class="hidden md:flex flex-col h-full justify-between">
+          <p
+            class="text-neutral-900/40 dark:text-neutral-100/40 italic font-cursive text-lg tracking-wide transform -rotate-3 w-full text-left"
+          >
+            {randomQuote}
+          </p>
+
+          <div class="flex flex-col items-center transform -rotate-3 self-end mt-auto pt-3">
+            <p
+              class="text-neutral-900/40 dark:text-neutral-100/40 font-cursive text-base -rotate-2"
+            >
+              {footer.sender}
+            </p>
+          </div>
+        </div>
+
+        <div class="block md:hidden mt-2 w-full pl-1 pr-12">
+          <div class="relative w-full overflow-hidden">
+            <div
+              class="bg-white/5 dark:bg-neutral-900/5 dark:bg-white/10 dark:bg-neutral-900/10 px-4 py-3 rounded-lg transform -rotate-2 shadow-sm"
+            >
+              <p
+                class="text-neutral-900/45 dark:text-neutral-100/45 italic font-cursive text-base text-left"
+              >
+                {randomQuote}
+              </p>
+
+              <div class="flex flex-col items-center mt-3 float-right transform -rotate-1">
+                <p class="text-neutral-900/45 dark:text-neutral-100/45 font-cursive text-sm">
+                  {footer.sender}
+                </p>
+              </div>
+              <div class="clear-both"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </footer>

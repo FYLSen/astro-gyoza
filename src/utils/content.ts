@@ -10,7 +10,7 @@ async function getAllPosts() {
 }
 
 // 获取所有文章，发布日期升序
-async function getNewestPosts() {
+async function getPostsOldestFirst() {
   const allPosts = await getAllPosts()
 
   return allPosts.sort((a, b) => {
@@ -19,7 +19,7 @@ async function getNewestPosts() {
 }
 
 // 获取所有文章，发布日期降序
-export async function getOldestPosts() {
+export async function getPostsNewestFirst() {
   const allPosts = await getAllPosts()
 
   return allPosts.sort((a, b) => {
@@ -64,7 +64,7 @@ export function slugify(text: string) {
 
 // 获取所有分类
 export async function getAllCategories() {
-  const newestPosts = await getNewestPosts()
+  const newestPosts = await getPostsOldestFirst()
 
   const allCategories = newestPosts.reduce<{ slug: string; name: string; count: number }[]>(
     (acc, cur) => {
@@ -91,7 +91,7 @@ export async function getAllCategories() {
 
 // 获取所有标签
 export async function getAllTags() {
-  const newestPosts = await getNewestPosts()
+  const newestPosts = await getPostsOldestFirst()
 
   const allTags = newestPosts.reduce<{ slug: string; name: string; count: number }[]>(
     (acc, cur) => {

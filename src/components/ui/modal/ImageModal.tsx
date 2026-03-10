@@ -32,11 +32,11 @@ export const ImageModal: React.FC<ImageModalProps> = ({ imageUrl, author }) => {
           ease: 'easeOut',
         },
       }}
-      className="relative max-w-7xl w-full bg-white rounded-lg overflow-hidden shadow-xl"
+      className="relative max-w-7xl w-full bg-white dark:bg-neutral-800 rounded-lg overflow-hidden shadow-xl"
     >
       <button
         onClick={dismiss}
-        className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+        className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors cursor-pointer"
       >
         <X size={16} />
       </button>

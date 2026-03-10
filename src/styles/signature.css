@@ -4,7 +4,7 @@
   fill: transparent;
   animation: drawSignature 8s linear infinite both;
   stroke-width: 2px;
-  stroke: theme('textColor.primary');
+  stroke: rgb(var(--color-text-primary));
 }
 
 @keyframes drawSignature {
@@ -19,7 +19,7 @@
   35%,
   75% {
     stroke-dashoffset: 0;
-    fill: theme('textColor.primary');
+    fill: rgb(var(--color-text-primary));
   }
 
   90%,

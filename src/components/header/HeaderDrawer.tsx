@@ -1,17 +1,16 @@
-import { menus } from '@/config.json'
-import { createContext, useContext, useState, forwardRef } from 'react'
-import * as Dialog from '@radix-ui/react-dialog'
+import { forwardRef, useContext, createContext, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { icons } from 'lucide-react'
+import type { Variants } from 'framer-motion'
+import * as Dialog from '@radix-ui/react-dialog'
+import { Icon, type IconName } from '@/components/ui/Icon'
+import { menus } from '@/config.json'
 
-type iconName = keyof typeof icons
-
-const contentVariants = {
+const contentVariants: Variants = {
   hidden: {
     x: '-100%',
     transition: {
       duration: 0.2,
-      ease: 'easeOut',
+      ease: 'easeOut' as const,
     },
   },
   visible: {
@@ -20,12 +19,12 @@ const contentVariants = {
       staggerChildren: 0.1,
       delayChildren: 0.1,
       duration: 0.2,
-      ease: 'easeOut',
+      ease: 'easeOut' as const,
     },
   },
 }
 
-const menuItemVariants = {
+const menuItemVariants: Variants = {
   hidden: {
     opacity: 0,
     x: '-100%',
@@ -62,7 +61,7 @@ export function HeaderDrawer({ zIndex = 999 }: { zIndex?: number }) {
 
             <Dialog.Content asChild>
               <motion.div
-                className="fixed left-0 inset-y-0 h-full bg-primary rounded-r-lg p-4 flex flex-col justify-center w-[260px] max-w-[80%]"
+                className="fixed left-0 inset-y-0 h-full bg-white dark:bg-neutral-900 rounded-r-lg p-4 flex flex-col justify-center w-[260px] max-w-[80%]"
                 style={{ zIndex: contentZIndex }}
                 variants={contentVariants}
                 initial="hidden"
@@ -91,12 +90,12 @@ const TriggerButton = forwardRef<HTMLButtonElement>((props, ref) => {
   return (
     <button
       ref={ref}
-      className="size-9 rounded-full shadow-lg shadow-zinc-800/5 border border-primary bg-white/50 dark:bg-zinc-800/50 backdrop-blur flex items-center justify-center text-primary hover:bg-white/80 dark:hover:bg-zinc-800/80 transition-colors"
+      className="size-9 rounded-full shadow-lg shadow-zinc-800/5 border border-neutral-200 dark:border-neutral-700 bg-white/50 dark:bg-zinc-800/50 backdrop-blur flex items-center justify-center text-neutral-900 dark:text-neutral-100 hover:bg-white/80 dark:hover:bg-zinc-800/80 transition-colors"
       type="button"
       aria-label="Open menu"
       {...props}
     >
-      <icons.Menu size={20} />
+      <Icon name="Menu" size={20} />
     </button>
   )
 })
@@ -109,11 +108,7 @@ function DrawerContentImpl() {
       {menus.map((menu) => (
         <motion.li key={menu.name} variants={menuItemVariants}>
           <a className="inline-flex p-2 space-x-4" href={menu.link} onClick={dismiss}>
-            <LucideIcon
-              name={menu.icon as iconName}
-              size={16}
-              className="inline-block translate-y-1"
-            />
+            <Icon name={menu.icon as IconName} size={16} className="inline-block translate-y-1" />
             <span>{menu.name}</span>
           </a>
         </motion.li>
@@ -123,16 +118,3 @@ function DrawerContentImpl() {
 }
 
 const DrawerContext = createContext<{ dismiss(): void }>(null!)
-
-const LucideIcon = ({
-  name,
-  size,
-  className,
-}: {
-  name: iconName
-  size: number
-  className?: string
-}) => {
-  const Icon = icons[name]
-  return <Icon size={size} className={className} />
-}

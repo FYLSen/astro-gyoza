@@ -1,0 +1,10 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro'
+import SearchResults from '@/components/search/SearchResults'
+---
+
+<PageLayout title="搜索" description="搜索结果">
+  <div class="w-[95%] sm:w-[90%] md:w-[85%] lg:w-[80%] xl:w-[75%] mx-auto px-4 py-16">
+    <SearchResults client:only="react" />
+  </div>
+</PageLayout>

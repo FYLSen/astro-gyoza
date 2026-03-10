@@ -8,7 +8,6 @@ import Highlight from '@/components/Highlight.astro'
 import SectionBlock from '@/components/SectionBlock.astro'
 import MarkdownWrapper from '@/components/MarkdownWrapper.astro'
 import FriendList from '@/components/FriendList.astro'
-import ProjectList from '@/components/ProjectList.astro'
 import SayingsGridContainer from '@/components/sayings/SayingsGridContainer.astro'
 import { ReadingProgress } from '@/components/post/ReadingProgress'
 import { PostToc } from '@/components/post/PostToc'
@@ -33,14 +32,14 @@ interface Props {
 const { entry } = Astro.props
 const { Content, headings } = await entry.render()
 
-const isPageLayout = ['friends', 'projects', 'sayings'].includes(entry.slug)
+const isPageLayout = ['sayings', 'friends'].includes(entry.slug)
 const isMdContentEmpty = !entry.body?.trim().length
 ---
 
 {
   isPageLayout ? (
     <PageLayout title={entry.data.title} description={entry.data.description}>
-      <div class="max-w-[800px] mx-auto px-4 py-16 space-y-8" data-pagefind-body>
+      <div class="max-w-[800px] mx-auto px-4 py-16 space-y-8">
         <header class="space-y-4">
           <h1 class="text-4xl font-bold">
             <Highlight>{entry.data.title}</Highlight>
@@ -49,9 +48,8 @@ const isMdContentEmpty = !entry.body?.trim().length
             <TypewriterText text={entry.data.description} speed={40} delay={0.1} client:load />
           </p>
         </header>
-        {entry.slug === 'friends' && <FriendList />}
-        {entry.slug === 'projects' && <ProjectList />}
         {entry.slug === 'sayings' && <SayingsGridContainer />}
+        {entry.slug === 'friends' && <FriendList />}
         {!isMdContentEmpty && (
           <MarkdownWrapper>
             <Content />
@@ -68,10 +66,7 @@ const isMdContentEmpty = !entry.body?.trim().length
       mdDescription={entry.data.description}
       mdSlug={entry.slug}
     >
-      <div
-        class="max-w-[1100px] mx-auto px-4 md:px-8 py-16 grid lg:grid-cols-[auto_260px] gap-8"
-        data-pagefind-body
-      >
+      <div class="max-w-[1100px] mx-auto px-4 md:px-8 py-16 grid lg:grid-cols-[auto_260px] gap-8">
         <div>
           <header class="space-y-4">
             <h1 class="text-4xl font-bold">
@@ -87,11 +82,11 @@ const isMdContentEmpty = !entry.body?.trim().length
             <Content />
           </MarkdownWrapper>
         </div>
-        <div class="hidden lg:block" data-pagefind-ignore>
+        <div class="hidden lg:block">
           <aside class="sticky top-20">
             <SectionBlock title="目录">
               <PostToc headings={headings} client:idle />
-              <hr class="my-2 border-primary max-w-[100px]" />
+              <hr class="my-2 border-neutral-200 dark:border-neutral-700 max-w-[100px]" />
               <ReadingProgress client:idle />
             </SectionBlock>
           </aside>

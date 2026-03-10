@@ -79,7 +79,7 @@ export default function MoonPhase() {
       </div>
 
       <motion.div
-        className="mt-6 text-primary/90 text-base px-4 absolute top-full z-20
+        className="mt-6 text-neutral-900/90 dark:text-neutral-100/90 text-base px-4 absolute top-full z-20
                    backdrop-blur-sm rounded-lg py-2 
                    shadow-lg dark:shadow-black/20 shadow-amber-900/10
                    transition-all duration-700

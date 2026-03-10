@@ -12,7 +12,7 @@ export function Header() {
   return (
     <header className="fixed top-0 inset-x-0 h-[64px] z-10 overflow-hidden">
       <BluredBackground />
-      <div className="max-w-[1100px] h-full md:px-4 mx-auto grid grid-cols-[64px_auto_64px]">
+      <div className="max-w-[1100px] h-full md:px-4 mx-auto grid grid-cols-[64px_auto_64px] relative">
         <div className="flex items-center justify-center">
           {isMobile ? <HeaderDrawer /> : <AnimatedLogo />}
         </div>
@@ -20,7 +20,7 @@ export function Header() {
           {isMobile ? <AnimatedLogo /> : <HeaderContent />}
           <HeaderMeta />
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center relative">
           <SearchButton />
         </div>
       </div>

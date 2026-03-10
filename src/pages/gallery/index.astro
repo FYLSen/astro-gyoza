@@ -6,7 +6,6 @@ import Highlight from '@/components/Highlight.astro'
 import { TypewriterText } from '@/components/TypewriterText'
 import { RssCopyButton } from '@/components/CopyLink'
 import { getCollection } from 'astro:content'
-
 // 获取照片数据
 const photosCollection = await getCollection('photos')
 const allPhotos = photosCollection.flatMap((entry) => entry.data)
@@ -15,6 +14,25 @@ const sortedPhotos = allPhotos.sort(
 )
 
 const rssUrl = new URL('gallery/rss.xml', site.url).href
+
+const structuredData = sortedPhotos.map((photo) => ({
+  '@context': 'https://schema.org/',
+  '@type': 'ImageObject',
+  contentUrl: photo.url,
+  license: new URL('license', site.url).href,
+  acquireLicensePage: new URL('about', site.url).href,
+  creditText: photo.author,
+  creator: {
+    '@type': 'Person',
+    name: photo.author || '',
+  },
+  copyrightNotice: `This image is copyrighted and belongs to ${photo.author || site.url || ''}.`,
+  datePublished: photo.date,
+  keywords: photo.tag || [],
+  description: photo.description || '',
+  name: photo.name || '',
+  contentLocation: photo.location || '',
+}))
 ---
 
 <PageLayout title={`${gallery.subtitle}@${gallery.title}`}>
@@ -23,15 +41,15 @@ const rssUrl = new URL('gallery/rss.xml', site.url).href
       <header class="space-y-4 mb-8">
         <h1 class="text-4xl font-bold">
           <Highlight>{gallery.title}</Highlight>
-          <RssCopyButton client:load url={rssUrl} />
+          <RssCopyButton url={rssUrl} client:load />
         </h1>
         <p><TypewriterText text={gallery.description} speed={40} delay={0.1} client:load /></p>
-        <hr class="w-[100px] border-primary" />
+        <hr class="w-[100px] border-neutral-200 dark:border-neutral-700" />
       </header>
     </div>
-
     <div class="w-[90%] mx-auto">
-      <GalleryWrapper initialPhotos={sortedPhotos} client:load />
+      <GalleryWrapper initialPhotos={sortedPhotos} client:only="react" />
     </div>
   </div>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 </PageLayout>

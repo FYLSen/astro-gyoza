@@ -6,22 +6,25 @@ import { getCollection } from 'astro:content'
 export async function GET(context: APIContext) {
   const photosCollection = await getCollection('photos')
   const allPhotos = photosCollection.flatMap((entry) => entry.data)
-  const sortedPhotos = allPhotos.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-  )
 
-  const generateCustomData = () => {
-    let customData = `<language>${site.lang}</language>\n`
+  const sortedPhotos = allPhotos
+    .map((photo) => ({
+      ...photo,
+      date: photo.date ? new Date(photo.date) : new Date(0),
+    }))
+    .sort((a, b) => b.date.getTime() - a.date.getTime())
+    .slice(0, 20)
 
-    if (follow?.enable && follow.galleryFeedId && follow.userId) {
-      customData += `
-    <follow_challenge>
-      <feedId>${follow.galleryFeedId}</feedId>
-      <userId>${follow.userId}</userId>
-    </follow_challenge>`
-    }
-    return customData
-  }
+  const customData = `
+    <language>${site.lang}</language>
+    ${
+      follow?.enable && follow.galleryFeedId && follow.userId
+        ? `<follow_challenge>
+        <feedId>${follow.galleryFeedId}</feedId>
+        <userId>${follow.userId}</userId>
+      </follow_challenge>`
+        : ''
+    }`
 
   return rss({
     title: `${site.title} - ${gallery.subtitle}@${gallery.title}`,
@@ -30,9 +33,12 @@ export async function GET(context: APIContext) {
     items: sortedPhotos.map((photo) => ({
       link: photo.url,
       title: photo.name || `${gallery.subtitle}@${gallery.title}`,
-      pubDate: new Date(photo.date),
-      description: `<img src="${photo.url}" alt="${photo.name || ''}" />${photo.description ? `<br />${photo.description}` : ''} ${photo.tag ? `<br/>标签：${photo.tag.join(', ')}` : ''}`,
+      pubDate: photo.date,
+      description: `<img src="${photo.url}" alt="${photo.name || ''}" />
+        ${photo.description ? `<p>${photo.description}</p>` : ''} 
+        ${photo.location ? `<p>拍摄于${photo.location}</p>` : ''}
+        ${Array.isArray(photo.tag) && photo.tag.length > 0 ? `<p>标签：${photo.tag.join(', ')}</p>` : ''}`,
     })),
-    customData: generateCustomData(),
+    customData,
   })
 }

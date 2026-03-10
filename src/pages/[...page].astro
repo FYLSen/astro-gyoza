@@ -2,7 +2,7 @@
 import type { GetStaticPaths } from 'astro'
 import PageLayout from '@/layouts/PageLayout.astro'
 import PostList from '@/components/post/PostList.astro'
-import PostPagination from '@/components/post/PostPagination.astro'
+import Pagination from '@/components/ui/Pagination'
 import { getSortedPosts, getHotTags, getAllCategories, getAllTags } from '@/utils/content'
 import appConfig from '@/config.json'
 import SectionBlock from '@/components/SectionBlock.astro'
@@ -52,11 +52,11 @@ const getPageUrl = (page: number) => {
     {currentPage === 1 && <Hero />}
     <div class="max-w-[1100px] px-4 md:px-8 py-20 mx-auto grid lg:grid-cols-[auto_300px] gap-10">
       <div class="min-w-0">
-        <SectionBlock title="最新发布">
+        <SectionBlock title="觅迹">
           <PostList posts={data} />
           {
             totalPage > 1 && (
-              <PostPagination current={currentPage} total={totalPage} getPageUrl={getPageUrl} />
+              <Pagination current={currentPage} total={totalPage} getPageUrl={getPageUrl} />
             )
           }
         </SectionBlock>
@@ -66,13 +66,16 @@ const getPageUrl = (page: number) => {
           <SectionBlock title="分类">
             <CategoryList categories={allCategories} />
           </SectionBlock>
-          <SectionBlock title="热门标签">
+          <SectionBlock title="标签">
             <TagList tags={hotTags} />
             {
               allTags.length > hotTags.length && (
                 <div class="mt-2 text-right">
-                  <a class="text-sm text-secondary hover:text-accent" href="/tags">
-                    更多标签 <ChevronsRight size={14} class="inline-block -translate-y-0.25" />
+                  <a
+                    class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-teal-600 dark:text-teal-400"
+                    href="/tags"
+                  >
+                    更多标签 <ChevronsRight size={14} class="inline-block" />
                   </a>
                 </div>
               )

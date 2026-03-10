@@ -18,7 +18,7 @@ export function CopyLink({
   url,
   Icon,
   iconSize = 18,
-  iconClass = 'inline-block -translate-y-0.5 text-accent',
+  iconClass = 'inline-block -translate-y-0.5 text-teal-600 dark:text-teal-400',
   buttonClass = 'cursor-pointer',
   ariaLabel = '复制链接',
   successMessage = '已复制链接',

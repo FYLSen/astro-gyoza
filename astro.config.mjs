@@ -10,7 +10,7 @@ import { rehypeEncryption } from './src/plugins/rehypeEncryption.js'
 import remarkDirective from 'remark-directive'
 import { remarkSpoiler } from './src/plugins/remarkSpoiler.js'
 import { remarkEmbed } from './src/plugins/remarkEmbed.js'
-import tailwind from '@astrojs/tailwind'
+import tailwindcss from '@tailwindcss/vite'
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import { rehypeHeadingIds } from '@astrojs/markdown-remark'
@@ -23,7 +23,6 @@ import { site } from './src/config.json' assert { type: 'json' }
 export default defineConfig({
   site: site.url,
   integrations: [
-    tailwind(),
     react(),
     sitemap(),
     swup({
@@ -46,7 +45,7 @@ export default defineConfig({
       rehypeCodeBlock,
       rehypeCodeHighlight,
       rehypeTableBlock,
-      [rehypeEncryption, {}],
+      rehypeEncryption,
     ],
     remarkRehype: {
       footnoteLabel: '参考',
@@ -55,9 +54,27 @@ export default defineConfig({
     },
   },
   vite: {
+    plugins: [tailwindcss()],
     build: {
+      minify: 'terser',
+      terserOptions: {
+        format: {
+          comments: false,
+        },
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+        },
+      },
       rollupOptions: {
-        external: ['/pagefind/pagefind.js'],
+        output: {
+          manualChunks: {
+            'lucide-react': ['lucide-react'],
+            'lucide-astro': ['lucide-astro'],
+            'react-vendor': ['react', 'react-dom'],
+            'framer-motion': ['framer-motion'],
+          },
+        },
       },
     },
   },

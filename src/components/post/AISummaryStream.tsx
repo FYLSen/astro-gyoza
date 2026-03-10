@@ -47,24 +47,32 @@ export const AISummaryStream: React.FC<AISummaryStreamProps> = ({ url }) => {
   }
 
   return (
-    <div className="my-4 p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50/80 dark:bg-gray-800/80">
-      <h2 className="flex items-center text-base font-bold mb-3 -ml-2">
+    <section
+      className="my-4 p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50/80 dark:bg-neutral-700/80"
+      data-ai-generated="true"
+      aria-labelledby="ai-content"
+    >
+      <div className="flex items-center text-base font-bold mb-3 -ml-2">
         <Bot
           size={20}
-          className="mr-2 text-accent dark:text-accent/80 inline-block -translate-y-0.25 animate-hue"
+          className="mr-2 text-teal-600 dark:text-teal-400 dark:text-teal-600/80 dark:text-teal-400/80 inline-block -translate-y-0.5 animate-hue"
           aria-hidden="true"
         />
-        AI 摘要
-      </h2>
+        <span id="ai-summary-title" className="font-bold text-gray-900 dark:text-gray-100">
+          AI 摘要
+        </span>
+      </div>
 
       {isLoading && (
-        <p className="flex items-center text-sm text-[#A5BDCA] dark:text-[#A5BDCA]-400 italic">
+        <div className="flex items-center text-sm text-[#A5BDCA] dark:text-[#A5BDCA]-400 italic">
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          奋力赶来...
-        </p>
+          <span>奋力赶来...</span>
+        </div>
       )}
 
-      {error && <p className="text-sm italic text-red-500/80 dark:text-red-400/80">AI 迷路了…</p>}
+      {error && (
+        <div className="text-sm italic text-red-500/80 dark:text-red-400/80">AI 迷路了…</div>
+      )}
 
       {summaryData && (
         <>
@@ -78,12 +86,12 @@ export const AISummaryStream: React.FC<AISummaryStreamProps> = ({ url }) => {
           <div className="text-right">
             <small className="inline-flex items-center text-xs text-gray-500 dark:text-gray-400">
               <Wand size={16} className="mr-1" aria-hidden="true" />
-              模型: {summaryData.model}
+              <span>模型: {summaryData.model}</span>
             </small>
           </div>
         </>
       )}
-    </div>
+    </section>
   )
 }
 

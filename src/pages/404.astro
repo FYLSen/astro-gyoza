@@ -3,9 +3,12 @@ import { hero } from '@/config.json'
 import Layout from '@/layouts/Layout.astro'
 import MoonPhase from '@/components/MoonPhase'
 import { ArrowUpLeft } from 'lucide-astro'
+import SplashCursor from '@/components/SplashCursor'
+import { FadeContent } from '@/components/FadeContent'
 ---
 
 <Layout title="404">
+  <SplashCursor client:only="react" />
   <div class="flex items-center justify-center min-h-screen dark:bg-neutral-700">
     <div class="container mx-auto px-8">
       <div
@@ -26,20 +29,25 @@ import { ArrowUpLeft } from 'lucide-astro'
           </h1>
 
           <div class="max-w-xl lg:mx-0 mx-auto">
-            <p
-              class="text-l text-secondary mt-3 text-center lg:text-left drop-shadow-[0_0_10px_rgba(255,255,255,0.2)] break-words"
+            <FadeContent
+              blur={true}
+              duration={1800}
+              easing="ease-out"
+              delay={300}
+              threshold={0.3}
+              initialOpacity={0.3}
+              className="text-l text-neutral-500 dark:text-neutral-400 mt-3 text-center lg:text-left drop-shadow-[0_0_10px_rgba(255,255,255,0.2)] break-words"
+              client:only="react">{hero.yiyan}</FadeContent
             >
-              {hero.yiyan}
-            </p>
 
             <div class="flex justify-center lg:justify-start">
-              <a
-                href="/"
-                class="mt-20 inline-flex items-center whitespace-nowrap cursor-pointer tracking-wider text-sm rounded-full border-2 border-neutral-100 leading-9 h-9 px-4 text-primary transition-all duration-300 ease-in-out backdrop-blur-sm hover:bg-primary hover:text-root hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(255,255,255,0.1)] md:text-sm md:leading-9 md:h-9 sm:text-xs sm:leading-7 sm:h-7 active:bg-neutral-600/50 active:text-root"
+              <button
+                onclick="window.location.href='/'"
+                class="mt-20 inline-flex items-center whitespace-nowrap cursor-pointer tracking-wider text-sm rounded-full border-2 border-neutral-100 leading-9 h-9 px-4 text-neutral-900 dark:text-neutral-100 transition-all duration-300 ease-in-out backdrop-blur-sm hover:bg-white dark:bg-neutral-900 hover:text-bg-root hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(255,255,255,0.1)] md:text-sm md:leading-9 md:h-9 sm:text-xs sm:leading-7 sm:h-7 active:bg-neutral-600/50 active:text-bg-root"
               >
                 <ArrowUpLeft size={14} class="inline-block mr-1" />
                 返回首页
-              </a>
+              </button>
             </div>
           </div>
         </div>

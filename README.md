@@ -2,8 +2,8 @@
 
 Gyoza-Lucide is a static blog template built with Astro and React.
 
-![astro version](https://img.shields.io/badge/astro-5.2.5-yellow)
-![node version](https://img.shields.io/badge/node-18.18-green)
+![astro version](https://img.shields.io/badge/astro-5.18.0-yellow)
+![node version](https://img.shields.io/badge/node-20.x-green)
 
 Demo Site:
 
@@ -29,9 +29,9 @@ Enjoy it!
 
 ## 🔧 Tech Stack
 
-- [Astro](https://astro.build/)
-- [React](https://reactjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
+- [Astro 5](https://astro.build/)
+- [React 19](https://reactjs.org/)
+- [Tailwind CSS 4](https://tailwindcss.com/)
 - [Framer Motion](https://www.framer.com/motion/)
 - [Jotai](https://jotai.org/)
 - [Lucide](https://lucide.dev/)
@@ -60,7 +60,7 @@ Enjoy it!
 └── tsconfig.json
 ```
 
-网站配置保存在 `config.json` 文件。
+网站配置保存在 `src/config.json` 文件。
 
 ## 🧞 Commands
 
@@ -70,4 +70,8 @@ Enjoy it!
 | `pnpm dev`     | Starts local dev server at `localhost:4321`  |
 | `pnpm build`   | Build your production site to `./dist/`      |
 | `pnpm preview` | Preview your build locally, before deploying |
-| `pnpm format`  | Format code using Prettier                   |
+| `pnpm lint`    | Format code using Prettier                   |
+
+## Algolia 爬取脚本
+
+为了更好的使用 Algolia，需要将爬取脚本在 Algolia 管理端进行配置，脚本案例在 `script/algolia.js`，注意修改为自己的域名。

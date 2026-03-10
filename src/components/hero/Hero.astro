@@ -1,31 +1,45 @@
 ---
 import { hero, author } from '@/config.json'
-import { SocialList } from './SocialList'
 import Highlight from '@/components/Highlight.astro'
 import { ChevronDown } from 'lucide-astro'
 import { AnimatedText } from './AnimatedText'
 import { AvatarContainer } from './AvatarContainer'
+import { FadeContent } from '@/components/FadeContent'
 ---
 
-<div class="lg:-mt-16 lg:h-dvh lg:min-h-[720px]">
+<div class="lg:-mt-16 lg:h-dvh lg:min-h-[720px] relative">
   <div
     class="relative max-w-[1300px] mx-auto h-full px-4 grid lg:grid-cols-2 items-center justify-items-center"
   >
     <div class="mt-[120px] lg:mt-0 w-full max-w-[590px] lg:pl-[12%]">
       <h1 class="text-3xl text-center lg:text-left text-balance">
-        Hi there, I'm <Highlight class="font-bold">{hero.name}</Highlight> 👋.<br />{hero.bio}
+        Hi there, I'm <Highlight class="font-bold">{hero.name}</Highlight> 👋.<br />
+        <span class="text-2xl">{hero.bio}</span>
       </h1>
-      <div class="text-sm text-secondary mt-3 text-center lg:text-left break-words">
+      <FadeContent
+        blur={true}
+        duration={1800}
+        easing="ease-out"
+        delay={300}
+        threshold={0.3}
+        initialOpacity={0.3}
+        className="text-sm text-neutral-500 dark:text-neutral-400 mt-3 text-center lg:text-left break-words"
+        client:only="react"
+      >
         {hero.description}
-      </div>
-      <SocialList className="mt-[60px]" client:load />
+      </FadeContent>
     </div>
     <div class="mt-20 lg:mt-0">
-      <AvatarContainer secret={author.secret} avatar={author.avatar} client:load />
+      <AvatarContainer
+        secret={author.secret}
+        avatar={author.avatar}
+        secretSvg={author.secretSvg}
+        client:load
+      />
     </div>
 
     <div class="mt-10 lg:mt-0 lg:absolute inset-x-0 bottom-0 flex flex-col items-center">
-      <p class="text-xs text-center text-balance text-secondary">
+      <p class="text-xs text-center text-balance text-neutral-500 dark:text-neutral-400">
         <AnimatedText first={hero.first} last={hero.last} client:load />
       </p>
       <div class="mt-7 text-xl animate-bounce">

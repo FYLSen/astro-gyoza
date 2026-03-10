@@ -11,13 +11,16 @@ interface Props {
 const { tags, category, class: className } = Astro.props
 ---
 
-<div class="flex flex-wrap gap-2 text-sm text-secondary" class:list={[className]}>
+<div
+  class="flex flex-wrap gap-2 text-sm text-neutral-500 dark:text-neutral-400"
+  class:list={[className]}
+>
   {
     category && (
       <div>
         <FolderOpen size={14} class="inline-block -translate-y-0.5" />
         <a
-          class="hover:text-accent hover:underline underline-offset-2 decoration-dashed"
+          class="hover:text-teal-600 dark:text-teal-400 hover:underline underline-offset-2 decoration-dashed"
           href={`/categories/${slugify(category)}`}
         >
           {category}
@@ -33,7 +36,7 @@ const { tags, category, class: className } = Astro.props
           <>
             {index > 0 && <span>, </span>}
             <a
-              class="hover:text-accent hover:underline underline-offset-2 decoration-dashed"
+              class="hover:text-teal-600 dark:text-teal-400 hover:underline underline-offset-2 decoration-dashed"
               href={`/tags/${slugify(tag)}`}
             >
               {tag}

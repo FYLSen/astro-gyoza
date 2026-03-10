@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { menus } from '@/config.json'
 import { clsx } from 'clsx'
 import { AnimatePresence, motion } from 'framer-motion'
-import { icons } from 'lucide-react'
+import { Icon, type IconName } from '@/components/ui/Icon'
 import {
   usePathName,
   useShouldAccessibleMenuShow,
@@ -19,8 +19,6 @@ export function HeaderContent() {
     </>
   )
 }
-
-type iconName = keyof typeof icons
 
 function AnimatedMenu() {
   const shouldBgShow = useShouldHeaderMenuBgShow()
@@ -92,7 +90,7 @@ function HeaderMenu({ isBgShow }: { isBgShow: boolean }) {
             key={menu.name}
             href={menu.link}
             title={menu.name}
-            icon={menu.icon as iconName}
+            icon={menu.icon as IconName}
             isActive={pathName === menu.link}
           />
         ))}
@@ -110,33 +108,20 @@ function HeaderMenuItem({
   href: string
   isActive: boolean
   title: string
-  icon: iconName
+  icon: IconName
 }) {
-  const LucideIcon = ({
-    name,
-    size,
-    className,
-  }: {
-    name: iconName
-    size: number
-    className?: string
-  }) => {
-    const Icon = icons[name]
-    return <Icon size={size} className={className} />
-  }
   return (
     <a
-      className={clsx('relative block px-4 py-1.5', isActive ? 'text-accent' : 'hover:text-accent')}
+      className={clsx(
+        'relative block px-4 py-1.5 cursor-pointer',
+        isActive ? 'text-teal-600 dark:text-teal-400' : 'hover:text-teal-600 dark:text-teal-400',
+      )}
       href={href}
     >
       <div className="flex space-x-2">
         {isActive && (
           <motion.div initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
-            <LucideIcon
-              name={icon as iconName}
-              size={12}
-              className="inline-block -translate-y-0.25"
-            />
+            <Icon name={icon} size={12} className="inline-block -translate-y-0.5" />
           </motion.div>
         )}
         <span>{title}</span>

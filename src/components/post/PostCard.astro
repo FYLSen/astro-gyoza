@@ -13,11 +13,13 @@ const { entry } = Astro.props
 const { remarkPluginFrontmatter } = await entry.render()
 ---
 
-<a class="block relative py-8 focus-visible:outline-0" href={`/posts/${entry.slug}`}>
+<a class="block relative py-8 focus-visible:outline-0 group" href={`/posts/${entry.slug}/`}>
   <PostCardHoverOverlay client:only="react" />
-  <h2 class="relative text-2xl font-bold group">
+  <h2 class="relative text-2xl font-bold">
     <span>{entry.data.title}</span>
-    <div class="absolute top-0 right-0 z-10 flex items-center gap-2 text-accent">
+    <div
+      class="absolute top-0 right-0 z-10 flex items-center gap-2 text-teal-600 dark:text-teal-400"
+    >
       {entry.data.password && <Lock size={16} />}
       {entry.data.sticky > 0 && <Pin size={16} class="transform rotate-45" />}
     </div>
@@ -25,12 +27,19 @@ const { remarkPluginFrontmatter } = await entry.render()
   <div class="mt-4 overflow-hidden">
     {
       entry.data.cover && (
-        <img
-          class="float-right ml-3 mb-2 size-[80px] rounded-md object-cover select-none"
-          src={entry.data.cover}
-          alt={entry.data.title}
-          loading="lazy"
-        />
+        <div class="float-right ml-3 mb-2 w-full md:w-auto overflow-hidden rounded-md">
+          <div
+            class="relative w-full md:w-[160px] h-[180px] md:h-[120px]"
+            style="aspect-ratio: 4/3;"
+          >
+            <img
+              class="w-full h-full object-cover select-none transition-transform duration-300 ease-in-out group-hover:scale-110"
+              src={entry.data.cover}
+              alt={entry.data.title}
+              loading="lazy"
+            />
+          </div>
+        </div>
       )
     }
     {entry.data.summary && <p>{entry.data.summary}</p>}
@@ -43,7 +52,7 @@ const { remarkPluginFrontmatter } = await entry.render()
       words={remarkPluginFrontmatter.words}
       readingMinutes={remarkPluginFrontmatter.readingMinutes}
     />
-    <div class="group shrink-0 text-accent flex items-center gap-2">
+    <div class="group/arrow shrink-0 text-teal-600 dark:text-teal-400 flex items-center gap-2">
       <span>继续阅读</span>
       <svg width="36" height="12" viewBox="0 0 36 12" fill="none" class="stroke-current">
         <path
@@ -54,19 +63,19 @@ const { remarkPluginFrontmatter } = await entry.render()
           d="M15 10L19.5 5.5L15 1"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="delay-100 opacity-0 group-hover:opacity-100"></path>
+          class="delay-100 opacity-0 group-hover/arrow:opacity-100"></path>
         <path
           d="M23 10L27.5 5.5L23 1"
           stroke-opacity="0.66"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="delay-200 opacity-0 group-hover:opacity-100"></path>
+          class="delay-200 opacity-0 group-hover/arrow:opacity-100"></path>
         <path
           d="M31 10L35.5 5.5L31 1"
           stroke-opacity="0.35"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="delay-300 opacity-0 group-hover:opacity-100"></path>
+          class="delay-300 opacity-0 group-hover/arrow:opacity-100"></path>
       </svg>
     </div>
   </div>

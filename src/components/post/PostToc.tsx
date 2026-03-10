@@ -120,7 +120,7 @@ export function TocItem({
       <span
         className={clsx(
           'absolute left-0 top-2 h-1 rounded-full',
-          isActive ? 'bg-accent' : 'bg-zinc-300 dark:bg-zinc-700',
+          isActive ? 'bg-teal-600 dark:bg-teal-400' : 'bg-zinc-300 dark:bg-neutral-500/80',
         )}
         style={{ width: `${4 * (7 - depth)}px` }}
       ></span>
@@ -128,8 +128,8 @@ export function TocItem({
         className={clsx(
           'inline-block pl-8 transition-opacity duration-300 ease-in-out',
           isActive
-            ? 'opacity-100 text-accent font-bold'
-            : 'opacity-75 group-hover:opacity-100 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100',
+            ? 'opacity-100 text-teal-600 dark:text-teal-400 font-bold'
+            : 'opacity-75 group-hover:opacity-100 text-zinc-400 hover:text-neutral-900 dark:hover:text-zinc-100',
         )}
         href={`#${slug}`}
       >
