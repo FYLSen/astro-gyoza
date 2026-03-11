@@ -74,4 +74,4 @@ Enjoy it!
 
 ## Algolia 爬取脚本
 
-为了更好的使用 Algolia，需要将爬取脚本在 Algolia 管理端进行配置，脚本案例在 `script/algolia.js`，注意修改为自己的域名。
+为了更好的使用 Algolia，需要将爬取脚本在 Algolia 管理端进行配置，脚本案例在 [scripts/algolia.js](scripts/algolia.js)，注意修改为自己的域名。
