@@ -14,6 +14,7 @@ export function Waline({ serverURL }: { serverURL: string }) {
       imageUploader: false,
       search: false,
       noCopyright: true,
+      noRss: true,
       reaction: [],
       locale: {
         placeholder: '要不要分享下想法～',
